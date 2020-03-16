@@ -1,0 +1,12 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap-icons": "^1.0.0-alpha2",
+    "express": "^4.17.1",
+    "msnodesqlv8": "^0.8.6"
+  },
+  "devDependencies": {
+    "mssql": "^6.0.1"
+  }
+}
