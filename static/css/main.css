@@ -1,12 +1,16 @@
 html, body {
     height: 100%;
     background-color: white;
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
 header {
     background-color: whitesmoke;
     height: 5rem;
     color: black;
+
 }
 
 .carousel-inner img {
@@ -18,6 +22,7 @@ header {
 
 .header-container {
     display: flex;
+
 }
 
 .logo {
@@ -34,19 +39,21 @@ header {
 .login {
     cursor: pointer;
 }
+.login:hover {
+    color: rgba(189, 185, 185, 0.863);
+
+}
 .login a{
     position: relative;
+    font-family: CENTURY GOTHIC;
     top: 30%;
-    right: -940%;
+    right: -900%;
     width: 20%;
     font-size: 1.5em;
     color: black;
 }
 
-.login:hover {
-    color: rgba(189, 185, 185, 0.863);
 
-}
 .title {
     cursor: pointer;
 }
@@ -55,16 +62,16 @@ header {
     color: rgba(189, 185, 185, 0.863);
 }
 .menu {
+    font-family: CENTURY GOTHIC;
     position: relative;
     top: 30%;
-    left: 65%;
+    left: 64%;
     width: 20%;
     font-size: 1.5em;
 }
 
 .menu .title::before {
     content: '▶ ';
-
 }
 
 .menu.open .title::before {
@@ -78,7 +85,7 @@ header {
     position: relative;
     list-style: none;
     display: none;
-    right:63% ;
+    right:58.3% ;
     top:25%;
 }
 
@@ -87,8 +94,18 @@ header {
     background-color: #f1f1f1!important;
 
 }
-
-
+.like-products{
+    position: relative;
+    top: 33%;
+    left: 47%;
+    font-size: 1.8em;
+}
+.orders{
+    position: relative;
+    top: 33%;
+    left: 48%;
+    font-size: 1.8em;
+}
 /*
  * Main Container
  */
@@ -102,4 +119,36 @@ header {
     position: relative;
     width: 50%;
     left: 25%;
+}
+.img{
+    width: 25%;
+    margin: 10% 5% 5% 0%;
+}
+
+.img-container {
+    position: relative;
+    left: 5%;
+    width: 100%;
+}
+
+.favorite-product{
+    width: 90%;
+    position: relative;
+    left: 5%;
+    top: 5%;
+    bottom: 10%;
+}
+/******************/
+/*footer*/
+/**/
+footer{
+    margin-top: 5%;
+}
+.footer-main{
+    position: relative;
+    right: 5%;
+    font-size: 2em;
+    float: right;
+    font-family: CENTURY GOTHIC;
+    text-transform: uppercase;
 }

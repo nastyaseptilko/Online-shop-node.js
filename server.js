@@ -21,6 +21,9 @@ app.get("/pageForMen", function(request, response){
 app.get("/pageForChildren", function(request, response){
     response.sendFile(__dirname + "/view/pageForChildren.html");
 });
+app.get("/sale", function(request, response){
+    response.sendFile(__dirname + "/view/sale.html");
+});
 app.get("/register", function(request, response){
     response.sendFile(__dirname + "/view/register.html");
 });

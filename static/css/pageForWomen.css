@@ -1,0 +1,28 @@
+.title-page-women{
+    border-bottom: 2px solid gray ;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: CENTURY GOTHIC;
+}
+.img1{
+    float: left;
+    width: 24.5%;
+    margin-left: 2%;
+    margin-top: 2%;
+    border-radius: 15px;
+}
+
+.img2{
+    float: left;
+    width: 24.5%;
+    margin-top: 2%;
+    border-radius: 15px;
+
+}
+
+.img-container-page-women {
+    position: relative;
+    left: 5%;
+    width: 90%;
+
+}
