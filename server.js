@@ -27,7 +27,12 @@ app.get("/sale", function(request, response){
 app.get("/register", function(request, response){
     response.sendFile(__dirname + "/view/register.html");
 });
-
+app.get("/likeProducts", function(request, response){
+    response.sendFile(__dirname + "/view/likeProducts.html");
+});
+app.get("/orders", function(request, response){
+    response.sendFile(__dirname + "/view/orders.html");
+});
 app.post("/register", function(request, response){
             let body = '';
             request.on('data', chunk => {

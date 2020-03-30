@@ -94,11 +94,19 @@ header {
     background-color: #f1f1f1!important;
 
 }
+.bi {
+    cursor: pointer;
+    color: black;
+}
+.bi:hover {
+    color: rgba(189, 185, 185, 0.863);
+}
 .like-products{
     position: relative;
     top: 33%;
     left: 47%;
     font-size: 1.8em;
+    color: black;
 }
 .orders{
     position: relative;
