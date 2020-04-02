@@ -31,6 +31,10 @@ app.get("/likeProducts", function(request, response){
     response.sendFile(__dirname + "/view/likeProducts.html");
 });
 app.get("/orders", function(request, response){
+    /*if () {
+        response.redirect('/login');
+    }*/
+
     response.sendFile(__dirname + "/view/orders.html");
 });
 app.post("/register", function(request, response){

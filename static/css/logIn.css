@@ -1,27 +1,23 @@
-head{
-    background-color: black;
-    height: 10%;
-    color: white;
-}
 
 body{
-    background: url("/img/fonLogin.jpg") repeat-y ;
+    background: url("/img/fon.jpg") repeat-y ;
     background-size: 100%;
 }
 .login {
     position: relative;
     width:50% ;
     left:25%;
-    border: solid 5px rgba(6, 49, 20, 0.83);
+    margin-top:3%;
+    border: solid 2px rgba(6, 49, 20, 0.83);
     border-radius:25px ;
     padding: 5%;
-    background: rgba(82, 76, 14, 0.31);
+    background: rgba(92, 96, 88, 0.29);
     opacity: 1;
 }
 .register{
     position: relative;
-    top: 2%;
-    left: 60%;
+    top: 5%;
+    left: 40%;
     cursor: pointer;
     font-size: 20px;
     color:black;
