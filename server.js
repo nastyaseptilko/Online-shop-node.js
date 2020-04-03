@@ -55,12 +55,16 @@ app.post("/register", function(request, response){
                 db.connectionPool.connect()
                     .then(pool => {
                         return pool.request()
-                            .input('login', db.sql.NVarChar, userInfo.username)
+                            .input('first_name', db.sql.NVarChar, userInfo.firstName)
+                            .input('last_name', db.sql.NVarChar, userInfo.lastName)
+                            .input('phone_number', db.sql.NVarChar, userInfo.phoneNumber)
+                            .input('email', db.sql.NVarChar, userInfo.username)
                             .input('password', db.sql.NVarChar, userInfo.password)
                             .input('city', db.sql.NVarChar, userInfo.city)
-                            .query(`insert into Users(Login, Password, City) values (@login, @password, @city);`);
+                            .query(`INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password,City) 
+                            values (@first_name, @last_name, @phone_number, @email, @password, @city);`);
                     });
-                response.end ('Submit');
+                response.redirect('/');
             });
 });
 app.post("/login", function(request, response){
@@ -83,9 +87,9 @@ app.post("/login", function(request, response){
 
                     .then(pool => {
                          return pool.request()
-                             .input('login', db.sql.NVarChar, userInfo.username)
+                             .input('email', db.sql.NVarChar, userInfo.username)
                              .input('password', db.sql.NVarChar, userInfo.password)
-                             .query(`SELECT * FROM Users WHERE (Login=@login) AND (Password=@password)`)
+                             .query(`SELECT * FROM Clients WHERE (Email=@email) AND (Password=@password)`)
                              .then(userResult => {
                                  console.log(userInfo);
 
@@ -93,7 +97,8 @@ app.post("/login", function(request, response){
                              })
                      });
 
-                 response.end ('Submit');
+                 response.redirect('/');
+
              });
 });
 

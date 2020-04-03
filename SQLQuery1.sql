@@ -19,6 +19,8 @@ create table Clients(
 	Postcode int
 );
 
+SELECT * FROM Clients WHERE (Email='nastya@mail.ru') AND (Password='password')
+
 INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password) VALUES
 ('Nastya', 'Septilko', '375333212979', 'nastya@mail.ru', 'password'),
 ('Ilya', 'Matsuev', '375292033067', 'ilya@mail.ru', 'password');

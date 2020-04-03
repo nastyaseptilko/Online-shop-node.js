@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
+    <link rel="shortcut icon" href="/img/znak.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/logIn.css">
 </head>
 <body>
-<a href="/register" class="register">Перейдите по ссылке чтобы зарегистрироваться</a>
+<a href="/register" ><span class="goOver-register">If you do not have an account on this site, clicking on this link you can register</span></a>
 <div class="login">
     <form action="/login" method="post" >
         <div class="form-group"  >
@@ -21,7 +22,7 @@
         </div>
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" >
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <label class="form-check-label" for="exampleCheck1" >Check me out</label>
         </div>
         <button type="submit" class="btn btn-primary" >Submit</button>
     </form>

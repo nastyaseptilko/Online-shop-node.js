@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9cea0bdc-d7ea-4458-9c83-787aadef3d23" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Magnific-Popup-master.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLQuery1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQLQuery1.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/magnific-popup.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/db/db_Qdew.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/db/db_Qdew.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/logIn.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/logIn.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/register.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/DjENjV0U0AE_Mgq.jpg_large" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/fon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/fon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/fonLogin.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/fonLogin.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/pageForWomen.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/pageForWomen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/logIn.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/logIn.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/register.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +38,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.10.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Учёба/3 curs/2 сем/node.js/20" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -107,6 +102,7 @@
       <workItem from="1585482939514" duration="17239000" />
       <workItem from="1585582204098" duration="2014000" />
       <workItem from="1585840031018" duration="5787000" />
+      <workItem from="1585912027288" duration="4741000" />
     </task>
     <servers />
   </component>
