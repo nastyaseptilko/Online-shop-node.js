@@ -1,60 +1,121 @@
 const fs = require('fs');
 const url = require('url');
 const express = require("express");
+const expressHandlebars = require('express-handlebars');
+
 const db = require('./model/db/db_Qdew');
 const app = express();
 
+app.engine('handlebars', expressHandlebars());
+app.set('view engine', 'handlebars');
 app.use(express.static(__dirname + '/static'));
+app.use(express.urlencoded({extended: false}));
 
-app.get("/", function(request, response){
+
+app.get("/", function (request, response) {
     response.sendFile(__dirname + "/view/new.html");
 });
-app.get("/login", function(request, response){
-    response.sendFile(__dirname + "/view/logIn.html");
+
+app.get("/login", function (request, response) {
+    // response.sendFile(__dirname + "/view/logIn.html");
+    response.render('login', {
+        title: 'Login',
+        layout: 'authorization',
+        registerLink: true
+    });
 });
-app.get("/pageForWomen", function(request, response){
-    response.sendFile(__dirname + "/view/pageForWomen.html");
+app.get("/register", function (request, response) {
+    //response.sendFile(__dirname + "/view/register.html");
+    response.render('register', {
+        title: 'Register',
+        layout: 'authorization',
+        registerLink: false
+    });
 });
-app.get("/pageForMen", function(request, response){
+app.get("/pageForWomen", function (request, response) {
+    // TODO: Взять массив продуктов с картинками из базы данных и вставить их в products
+    response.render('pageForWomen', {
+        title: 'For Women',
+        layout: 'products',
+        products: [
+            {
+                id: 1,
+                imageUrl: '/img/10.jpg',
+                description: 'Dictionary text for product'
+            },
+            {
+                id: 2,
+                imageUrl: '/img/10.jpg',
+                description: 'Dictionary text for product'
+            },
+            {
+                id: 3,
+                imageUrl: '/img/10.jpg',
+                description: 'Dictionary text for product'
+            },
+            {
+                id: 4,
+                imageUrl: '/img/10.jpg',
+                description: 'Dictionary text for product'
+            },
+            {
+                id: 5,
+                imageUrl: '/img/10.jpg',
+                description: 'Dictionary text for product'
+            }
+        ]
+    });
+    // response.sendFile(__dirname + "/view/pageForWomen.html");
+});
+
+app.get("/pageForMen", function (request, response) {
     response.sendFile(__dirname + "/view/pageForMen.html");
 });
-app.get("/pageForChildren", function(request, response){
+
+app.get("/pageForChildren", function (request, response) {
     response.sendFile(__dirname + "/view/pageForChildren.html");
 });
-app.get("/sale", function(request, response){
+app.get("/sale", function (request, response) {
     response.sendFile(__dirname + "/view/sale.html");
 });
-app.get("/register", function(request, response){
-    response.sendFile(__dirname + "/view/register.html");
-});
-app.get("/likeProducts", function(request, response){
+
+app.get("/likeProducts", function (request, response) {
     response.sendFile(__dirname + "/view/likeProducts.html");
 });
-app.get("/orders", function(request, response){
+app.get("/orders", function (request, response) {
     /*if () {
         response.redirect('/login');
     }*/
 
     response.sendFile(__dirname + "/view/orders.html");
 });
-app.post("/register", function(request, response){
-            let body = '';
-            request.on('data', chunk => {
-                body += chunk; // преобразовать буфер в строку
-            });
-            request.on ('end', () => {
-                body = decodeURIComponent(body);            // Преобразует строку из utf-8
-                body = body.split('&');            // []
-
-                let userInfo = {};
-                body.forEach(registerData => {
-                    registerData = registerData.split('=');
-                    userInfo[registerData[0]] = registerData[1];
-                });
-
-                db.connectionPool.connect()
-                    .then(pool => {
-                        return pool.request()
+app.post("/register", function (request, response) {
+    let userInfo = request.body;
+    console.log(userInfo);
+    // TODO: Проверить совпадают ли пароли passwordand confirm password
+    // TODO: если нет - вернуть юзеру ошибку
+    if (userInfo.password !== userInfo.confirm) {
+        response.render('register', {
+            layout: 'authorization',
+            error: 'invalid password'
+        });
+        return;
+    }
+    db.connectionPool.connect()
+        .then(pool => {
+            return pool.request()
+                .input('email', db.sql.NVarChar, userInfo.username)
+                .query(`SELECT * FROM Clients WHERE (Email=@email)`)
+                .then(userResult => {
+                    console.log(userInfo);
+                    if (userResult.recordset.length != 0) {
+                        response.render('register', {
+                            layout: 'authorization',
+                            errorIsUser: 'this user is in the site'
+                        });
+                        pool.close();
+                    } else {
+                        pool.request()
                             .input('first_name', db.sql.NVarChar, userInfo.firstName)
                             .input('last_name', db.sql.NVarChar, userInfo.lastName)
                             .input('phone_number', db.sql.NVarChar, userInfo.phoneNumber)
@@ -62,169 +123,43 @@ app.post("/register", function(request, response){
                             .input('password', db.sql.NVarChar, userInfo.password)
                             .input('city', db.sql.NVarChar, userInfo.city)
                             .query(`INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password,City) 
-                            values (@first_name, @last_name, @phone_number, @email, @password, @city);`);
-                    });
-                response.redirect('/');
-            });
-});
-app.post("/login", function(request, response){
-             let body_log = '';
-             request.on ('data', chunk => {
-                 body_log += chunk; // преобразовать буфер в строку
-             });
-             request.on ('end', () => {
-                body_log = decodeURIComponent(body_log);            // Преобразует строку из utf-8
-                body_log = body_log.split('&');            // []
-                 console.log(body_log);
-
-                 let userInfo = {};
-                 body_log.forEach(registerData => {
-                    registerData = registerData.split('=');
-                    userInfo[registerData[0]] = registerData[1];
+                            values (@first_name, @last_name, @phone_number, @email, @password, @city);`)
+                            .then(userResult => {
+                                response.redirect('/');
+                                pool.close();
+                            });
+                    }
                 });
+        });
 
-                 db.connectionPool.connect()
+});
 
-                    .then(pool => {
-                         return pool.request()
-                             .input('email', db.sql.NVarChar, userInfo.username)
-                             .input('password', db.sql.NVarChar, userInfo.password)
-                             .query(`SELECT * FROM Clients WHERE (Email=@email) AND (Password=@password)`)
-                             .then(userResult => {
-                                 console.log(userInfo);
+app.post("/login", function (request, response) {
+    db.connectionPool.connect()
+        .then(pool => {
+            let userInfo = request.body;
+            return pool.request()
+                .input('email', db.sql.NVarChar, userInfo.username)
+                .input('password', db.sql.NVarChar, userInfo.password)
+                .query(`SELECT * FROM Clients WHERE (Email=@email) AND (Password=@password)`)
+                .then(userResult => {
+                    console.log(userInfo);
+                    if (userResult.recordset.length != 0) {
+                        response.redirect('/');
+                    } else {
+                        response.render('login', {
+                            layout: 'authorization',
+                            error: 'invalid username or password'
+                        })
+                    }
+                    pool.close();
 
-                                console.log(userResult.recordset);
-                             })
-                     });
+                    // В recordset лежит массив результата селекта (в нашем случае он должен быть либо пустым, либо там должен быть 1 юзер)
+                    console.log(userResult.recordset);
 
-                 response.redirect('/');
-
-             });
+                });
+        });
 });
 
 app.listen(3000);
 console.log('run server http://localhost:3000/');
-
-
-
-
-//
-// const server = http.createServer(function (request,response) {
-//     if( request.method ==='GET' ) {
-//         if(request.url==='/'){
-//             let html =  fs.readFileSync('./view/new.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else if(request.url==='/login'){
-//             let html =  fs.readFileSync('./view/logIn.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else if(request.url==='/pageForWomen'){
-//             let html =  fs.readFileSync('./view/pageForWomen.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else if(request.url==='/pageForMen'){
-//             let html =  fs.readFileSync('./view/pageForMen.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else if(request.url==='/pageForChildren'){
-//             let html =  fs.readFileSync('./view/pageForChildren.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else if(request.url==='/register'){
-//             let html =  fs.readFileSync('./view/register.html');
-//             response.writeHead (200,{ 'Content-Type':'text/html;charset=utf-8'});
-//             response.end(html);
-//         }
-//         else {
-//             let filename = request.url.substring(1);
-//             fs.readFile('./' + filename, (err, data) => {
-//                 if (err != null) {
-//                     response.setHeader('Content-Type', 'text/html');
-//                     response.statusCode = 404;
-//                     response.end();
-//                 } else {
-//                     let file = fs.readFileSync('./'+filename);
-//                     response.end(file);
-//                 }
-//             });
-//         }
-//     }
-//     else if(request.method==='POST'){
-//          if(request.url==='/register' ){
-//             let body = '';
-//             request.on ('data', chunk => {
-//                 body += chunk; // преобразовать буфер в строку
-//             });
-//             request.on ('end', () => {
-//                 body = decodeURIComponent(body);            // Преобразует строку из utf-8
-//                 body = body.split('&');            // []
-//
-//                 let userInfo = {};
-//                 body.forEach(registerData => {
-//                     registerData = registerData.split('=');
-//                     userInfo[registerData[0]] = registerData[1];
-//                 });
-//
-//                 db.connectionPool.connect()
-//                     .then(pool => {
-//                         return pool.request()
-//                             .input('login', db.sql.NVarChar, userInfo.username)
-//                             .input('password', db.sql.NVarChar, userInfo.password)
-//                             .input('city', db.sql.NVarChar, userInfo.city)
-//                             .query(`insert into Users(Login, Password, City) values (@login, @password, @city);`);
-//                     });
-//                 response.end ('Submit');
-//             });
-//         }
-//         else if (request.url==='/login' ){
-//             let body_log = '';
-//             request.on ('data', chunk => {
-//                 body_log += chunk; // преобразовать буфер в строку
-//             });
-//             request.on ('end', () => {
-//                 body_log = decodeURIComponent(body_log);            // Преобразует строку из utf-8
-//                 body_log = body_log.split('&');            // []
-//                 console.log(body_log);
-//
-//                 let userInfo = {};
-//                 body_log.forEach(registerData => {
-//                     registerData = registerData.split('=');
-//                     userInfo[registerData[0]] = registerData[1];
-//                 });
-//
-//                 db.connectionPool.connect()
-//
-//                     .then(pool => {
-//                         return pool.request()
-//                             .input('login', db.sql.NVarChar, userInfo.username)
-//                             .input('password', db.sql.NVarChar, userInfo.password)
-//                             .query(`SELECT * FROM Users WHERE (Login=@login) AND (Password=@password)`)
-//                             .then(userResult => {
-//                                 console.log(userInfo);
-//
-//                                 console.log(userResult.recordset);
-//                             })
-//                     });
-//
-//                 response.end ('Submit');
-//             });
-//         }
-//
-//     }
-//     else {
-//         response.writeHead (400,{ 'Content-Type':'text/html'});
-//         response.end();
-//     }
-// }).listen(3000);
-
-
-
-
-
-

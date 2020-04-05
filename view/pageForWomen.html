@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <title>For women</title>
     <link rel="shortcut icon" href="/img/znak.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/css/pageForWomen.css">
+    <link rel="stylesheet" href="/css/pageForProducts.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/magnific-popup.css">
 
 </head>
 <body>
-<h1 class="title-page-women" >Women shop</h1>
+<h1 class="title-page" >Women shop</h1>
 
-<div class="img-container-page-women">
-    <div class="img1" id="img1"><img src="/img/10.jpg" width="300px" height="300px">
+<div class="img-container-page-products">
+    <div class="img product-image" id="img1"> <img src="/img/10.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img2" id="img2"><img src="/img/11.jpg" width="300px" height="300px">
+    <div class="img product-image" ><img src="/img/11.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img2" id="img3"><img src="/img/12.jpg" width="300px" height="300px">
+    <div class="img product-image" ><img src="/img/12.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img2" id="img4"><img src="/img/13.jpg" width="300px" height="300px">
+    <div class="img product-image"><img src="/img/13.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img1" id="img5" > <img src="/img/14.jpg" width="300px" height="300px">
+    <div class="img product-image" > <img src="/img/14.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img2" id="img6"><img src="/img/15.jpg" width="300px" height="300px">
+    <div class="img product-image"><img src="/img/15.jpg" width="300px" height="300px">
         Dictionary text for product
     </div>
-    <div class="img2" id="img7"><img src="/img/16.jpg" width="300px" height="300px" >
+    <div class="img product-image" ><img src="/img/16.jpg" width="300px" height="300px" >
         Dictionary text for product
     </div>
-    <div class="img2" id="img8"><img src="/img/17.jpg" width="300px" height="300px" >
+    <div class="img product-image" ><img src="/img/17.jpg" width="300px" height="300px" >
         Dictionary text for product
     </div>
 </div>
@@ -47,9 +47,16 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
+        let productsImages = $('.product-image');
 
+        productsImages.each(function() {
+            let imageUrl = $(this).find('img').attr('src');
+            $(this).magnificPopup({
+                items: {src: imageUrl, type: 'image'}
+            });
+        });
 
-        $('#img1').magnificPopup({
+        /*$('#img1').magnificPopup({
             items: {src: '/img/10.jpg', type: 'image'}
         });
         $('#img2').magnificPopup({
@@ -72,7 +79,7 @@
         });
         $('#img8').magnificPopup({
             items: {src: '/img/17.jpg', type: 'image'}
-        });
+        });*/
     });
 </script>
 </body>

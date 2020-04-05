@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+    <link rel="shortcut icon" href="/img/znak.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/pageForProducts.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+</head>
+<body>
+<h1 class="title-page" >Women shop</h1>
+<div class="img-container-page-products">
+
+        {{{body}}}
+
+</div>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery.magnific-popup.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        let productsImages = $('.product-image');
+
+        productsImages.each(function() {
+            let imageUrl = $(this).find('img').attr('src');
+            $(this).magnificPopup({
+                items: {src: imageUrl, type: 'image'}
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

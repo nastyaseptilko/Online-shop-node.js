@@ -1,0 +1,21 @@
+.title-page{
+    border-bottom: 2px solid gray ;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: CENTURY GOTHIC;
+}
+
+
+.img{
+    float: left;
+    width: 22.5%;
+    margin-top: 2%;
+
+}
+
+.img-container-page-products {
+    position: relative;
+    left: 10%;
+    width: 90%;
+
+}

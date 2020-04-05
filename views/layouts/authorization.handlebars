@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="shortcut icon" href="/img/znak.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/authorization.css">
+</head>
+<body>
+
+{{#if registerLink}}
+    <a href="/register">
+        <span class="goOver-links">If you do not have an account on this site, clicking on this link you can <strong> REGISTER </strong> </span>
+    </a>
+{{else}}
+    <a href="/login">
+        <span class="goOver-links">If you do have an account on this site, clicking on this link you can  <strong> LOGIN </strong></span>
+    </a>
+{{/if}}
+
+<div class="forms">
+    {{{body}}}
+
+</div>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>
