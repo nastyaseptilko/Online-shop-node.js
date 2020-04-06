@@ -53,7 +53,8 @@ create table Products(
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
 ('For Women', 'Jacket', 169.99, 'Very beautiful jacket for women.'),
-('For Men', 'Jacket-TG', 139.99, 'Very beautiful jacket for men.');
+('For Men', 'Jacket-TG', 139.99, 'Very beautiful jacket for men.'),
+
 SELECT * FROM Products;
 
 
@@ -89,9 +90,22 @@ INSERT INTO Image(Product_Id, Url) VALUES
 (1, '/img/8.jpg'),
 (1, '/img/15.jpg'),
 (2, '/img/14.jpg');
-SELECT * FROM Image;
+SELECT * FROM Image WHERE Product_Id =1 ;
+SELECT Url  FROM Image  where  Product_Id =1 ;
+delete from Image where Image_Id = 6;
+
+INSERT INTO Image(Product_Id, Url) VALUES
+(3, '/img/children/c1.jpg'),
+(3, '/img/children/c2.jpg'),
+(3, '/img/children/c3.jpg'),
+(3, '/img/children/c4.jpg'),
+(3, '/img/children/c5.jpg'),
+(3, '/img/children/c6.jpg'),
+(3, '/img/children/c7.jpg'),
+(3, '/img/children/c8.jpg');
 
 
+SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' 
 
 
 --drop table Orders;

@@ -34,155 +34,79 @@ app.get("/register", function (request, response) {
 });
 app.get("/pageForWomen", function (request, response) {
     // TODO: Взять массив продуктов с картинками из базы данных и вставить их в products
-    response.render('pageForWomen', {
-        title: 'For Women',
-        layout: 'products',
-        titlePage: 'women shop',
-        products: [
-            {
-                id: 1,
-                imageUrl: '/img/10.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 2,
-                imageUrl: '/img/11.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 3,
-                imageUrl: '/img/12.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 4,
-                imageUrl: '/img/13.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 5,
-                imageUrl: '/img/14.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 6,
-                imageUrl: '/img/15.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 7,
-                imageUrl: '/img/16.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 8,
-                imageUrl: '/img/17.jpg',
-                description: 'Dictionary text for product'
-            }
-        ]
-    });
-    // response.sendFile(__dirname + "/view/pageForWomen.html");
+    db.connectionPool.connect()
+        .then(pool => {
+            let userInfo = request.body;
+            return pool.request()
+                .query(`SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' `)
+                .then(Result => {
+                    if (Result.recordset.length != 0)
+                    {
+                        response.render('pageForWomen', {
+                            title: 'For Women',
+                            layout: 'products',
+                            titlePage: 'women shop',
+                            products: Result.recordset
+                        });
+                    }
+                    else
+                        {
+                            console.log("ERROR");
+                        }
+                        pool.close();
+                });
+        });
+
 });
 
 app.get("/pageForMen", function (request, response) {
-   // response.sendFile(__dirname + "/view/pageForMen.html");
-    response.render('pageForMen', {
-        title: 'For Men',
-        layout: 'products',
-        titlePage: 'men shop',
-        products: [
-            {
-                id: 1,
-                imageUrl: '/img/m1.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 2,
-                imageUrl: '/img/m2.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 3,
-                imageUrl: '/img/m3.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 4,
-                imageUrl: '/img/m4.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 5,
-                imageUrl: '/img/m5.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 6,
-                imageUrl: '/img/m6.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 7,
-                imageUrl: '/img/m7.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 8,
-                imageUrl: '/img/m8.jpg',
-                description: 'Dictionary text for product'
-            }
-        ]
-    });
+    db.connectionPool.connect()
+        .then(pool => {
+            let userInfo = request.body;
+            return pool.request()
+                .query(`SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Men' `)
+                .then(Result => {
+                    if (Result.recordset.length != 0)
+                    {
+                        response.render('pageForMenShop', {
+                            title: 'For Men',
+                            layout: 'products',
+                            titlePage: 'men shop',
+                            products: Result.recordset
+                        });
+                    }
+                    else
+                    {
+                        console.log("ERROR");
+                    }
+                    pool.close();
+                });
+        });
 });
 
 app.get("/pageForChildren", function (request, response) {
-    response.render('pageForChildren', {
-        title: 'For Children',
-        layout: 'products',
-        titlePage: 'children shop',
-        products: [
-            {
-                id: 1,
-                imageUrl: '/img/c1.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 2,
-                imageUrl: '/img/c2.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 3,
-                imageUrl: '/img/c3.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 4,
-                imageUrl: '/img/c4.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 5,
-                imageUrl: '/img/c5.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 6,
-                imageUrl: '/img/c6.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 7,
-                imageUrl: '/img/c7.jpg',
-                description: 'Dictionary text for product'
-            },
-            {
-                id: 8,
-                imageUrl: '/img/c8.jpg',
-                description: 'Dictionary text for product'
-            }
-        ]
-    });
+    db.connectionPool.connect()
+        .then(pool => {
+            let userInfo = request.body;
+            return pool.request()
+                .query(`SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Children' `)
+                .then(Result => {
+                    if (Result.recordset.length != 0)
+                    {
+                        response.render('pageForChildren', {
+                            title: 'For Children',
+                            layout: 'products',
+                            titlePage: 'children shop',
+                            products: Result.recordset
+                        });
+                    }
+                    else
+                    {
+                        console.log("ERROR");
+                    }
+                    pool.close();
+                });
+        });
 });
 app.get("/sale", function (request, response) {
     response.sendFile(__dirname + "/view/sale.html");
