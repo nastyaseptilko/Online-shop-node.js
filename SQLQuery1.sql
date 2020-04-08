@@ -52,11 +52,39 @@ create table Products(
 );
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
-('For Women', 'Jacket', 169.99, 'Very beautiful jacket for women.'),
+('For Women', 'Dress', 169.99, 'Very beautiful Dress for women.'),
+('For Women', 'Cross', 169.99, 'Very beautiful Cross for women.')
 ('For Men', 'Jacket-TG', 139.99, 'Very beautiful jacket for men.'),
 
 SELECT * FROM Products;
+SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' 
 
+SELECT pr.Product_id, pr.Description, im.Url FROM Products pr RIGHT JOIN Image im on im.Product_Id = pr.Product_id 
+
+
+
+SELECT * FROM Products WHERE Category = 'For Women';
+SELECT * FROM Products WHERE Product_id = 1
+
+SELECT pr.Product_id, pr.Description, img.Url
+FROM Products pr
+CROSS APPLY
+(
+	SELECT TOP 1 im.Url
+	FROM Image im
+	WHERE im.Product_id = pr.Product_id
+) img WHERE Category = 'For Women' 
+
+
+SELECT pr.Product_id, pr.Description, im.Url
+FROM Products pr
+JOIN Image im
+ON im.Image_Id =
+(
+    SELECT TOP 1 Image_Id 
+    FROM Image
+    WHERE Product_id = pr.Product_id
+) WHERE pr.Category = 'For Women' 
 
 
 
@@ -92,7 +120,7 @@ INSERT INTO Image(Product_Id, Url) VALUES
 (2, '/img/14.jpg');
 SELECT * FROM Image WHERE Product_Id =1 ;
 SELECT Url  FROM Image  where  Product_Id =1 ;
-delete from Image where Image_Id = 6;
+delete from Image;
 
 INSERT INTO Image(Product_Id, Url) VALUES
 (3, '/img/children/c1.jpg'),
@@ -105,7 +133,15 @@ INSERT INTO Image(Product_Id, Url) VALUES
 (3, '/img/children/c8.jpg');
 
 
-SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' 
+INSERT INTO Image(Product_Id, Url) VALUES
+(1, '/img/women/w5.jpg')
+
+
+
+(4, '/img/women/w8.jpg'),
+(5, '/img/women/w2.jpg'),
+(2, '/img/men/m7.jpg'),
+(3, '/img/children/c8.jpg')
 
 
 --drop table Orders;

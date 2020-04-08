@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/magnific-popup.css">
 
+
 </head>
 <body>
 <div class="img-container-page-products">
@@ -23,6 +24,7 @@
 <script src="/js/jquery.magnific-popup.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 
+
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -31,9 +33,13 @@
         productsImages.each(function() {
             let imageUrl = $(this).find('img').attr('src');
             $(this).magnificPopup({
+
+                verticalFit: true,
                 items: {src: imageUrl, type: 'image'}
             });
         });
+
+
     });
 </script>
 

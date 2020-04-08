@@ -1,4 +1,7 @@
-<div class="img product-image" data-id="{{ Product_id}}">
-    <img src="{{Url}}" width="300px" height="300px">
+<div class="img product-image" data-id="{{Product_id}}"  title="{{Description}}">
+    <img src="{{Url}}" width="300px" height="300px" alt="">
     {{Description}}
+</div>
+<div>
+    <button onclick="window.location.href='/products/{{Product_id}}'">More...</button>
 </div>
