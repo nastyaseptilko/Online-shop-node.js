@@ -25,3 +25,9 @@
     font-size: 12px;
 
 }
+.price{
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-family: CENTURY GOTHIC;
+    color: #0e5d47;
+}

@@ -1,13 +1,18 @@
-<div>
-    <div>
-        {{Product_Name}}
-        {{Description}}
-        {{Price}}
-        {{Discount}}
-    </div>
-    <div>
-        {{#each Images}}
-            <img src="{{Url}}" alt="">
-        {{/each}}
-    </div>
+<div class="product-image">
+    {{#each Images}}
+        <img src="{{Url}}" class="image" width="400px" height="400px" alt="">
+    {{/each}}
 </div>
+<div class="description">
+    <span class="description-element"> Название продукта:  </span> {{Product_Name}}
+    </br>
+    <span class="description-element"> Описание продукта: </span>  {{Description}}
+    </br>
+    <span class="description-element"> Цена продукта: </span> {{Price}} BY
+    </br>
+    <span class="description-element"> </span>{{Discount}}
+    </br>
+
+
+</div>
+

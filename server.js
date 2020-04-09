@@ -36,7 +36,7 @@ app.get("/pageForWomen", function (request, response) {
     db.connectionPool.connect()
         .then(pool => {
             return pool.request()
-                .query(`SELECT pr.Product_id, pr.Description, img.Url
+                .query(`SELECT pr.Product_id, pr.Price, img.Url
                                   FROM Products pr
                                   CROSS APPLY
                                   (
@@ -65,7 +65,7 @@ app.get("/pageForMen", function (request, response) {
     db.connectionPool.connect()
         .then(pool => {
             return pool.request()
-                .query(`SELECT pr.Product_id, pr.Description, img.Url
+                .query(`SELECT pr.Product_id, pr.Price, img.Url
                                   FROM Products pr
                                   CROSS APPLY
                                   (
@@ -93,7 +93,7 @@ app.get("/pageForChildren", function (request, response) {
     db.connectionPool.connect()
         .then(pool => {
             return pool.request()
-                .query(`SELECT pr.Product_id, pr.Description, img.Url
+                .query(`SELECT pr.Product_id, pr.Price, img.Url
                                   FROM Products pr
                                   CROSS APPLY
                                   (
@@ -134,7 +134,7 @@ app.get("/products/:productId", function (request, response) {
                         const images = await pool.query('SELECT * FROM Image WHERE Product_id = ' + productId);
 
                         response.render("productEntityDescription", {
-                            title: "Description for " + productId + " product!!!",
+                            title: "Description for " + productId + " product",
                             layout: "productDescription",
                             Product_Name: Result.recordset[0].Name,
                             Description: Result.recordset[0].Description,

@@ -52,7 +52,7 @@ create table Products(
 );
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
-('For Women', 'Dress', 169.99, 'Very beautiful Dress for women.'),
+('For Women', 'Рубашка и Брюки', 158.70, ' РАЗМЕРЫ: XS, S, L, XL; ДЛИНА ИЗДЕЛИЯ ПО СПИНКЕ РУБАШКА:59.0 см.; ДЛИНА БРЮК ОТ ТАЛИИ:110.0 см.; СОСТАВ:15% эластан / 75% хлопок; ЦВЕТ: синий / черный; ПОКРОЙ: свободный, ТИП ТКАНИ: хлопчатобумажный')
 ('For Women', 'Cross', 169.99, 'Very beautiful Cross for women.')
 ('For Men', 'Jacket-TG', 139.99, 'Very beautiful jacket for men.'),
 
@@ -66,7 +66,7 @@ SELECT pr.Product_id, pr.Description, im.Url FROM Products pr RIGHT JOIN Image i
 SELECT * FROM Products WHERE Category = 'For Women';
 SELECT * FROM Products WHERE Product_id = 1
 
-SELECT pr.Product_id, pr.Description, img.Url
+SELECT pr.Product_id, pr.Price, img.Url
 FROM Products pr
 CROSS APPLY
 (
@@ -114,10 +114,6 @@ create table Image(
 	Url varchar(150)
 );
 
-INSERT INTO Image(Product_Id, Url) VALUES
-(1, '/img/8.jpg'),
-(1, '/img/15.jpg'),
-(2, '/img/14.jpg');
 SELECT * FROM Image WHERE Product_Id =1 ;
 SELECT Url  FROM Image  where  Product_Id =1 ;
 delete from Image;
@@ -134,8 +130,8 @@ INSERT INTO Image(Product_Id, Url) VALUES
 
 
 INSERT INTO Image(Product_Id, Url) VALUES
-(1, '/img/women/w5.jpg')
-
+(7, '/img/women/w11.jpg'),
+(7, '/img/women/w12.jpg')
 
 
 (4, '/img/women/w8.jpg'),

@@ -1,0 +1,29 @@
+.product-description{
+    position: relative;
+    left: 5%;
+    width: 90%;
+}
+.description{
+    position: relative;
+    float: left;
+    font-size: 1.7em;
+    border: 1.5px solid black;
+    border-radius: 20px;
+    padding: 3%;
+}
+.product-image{
+    position: relative;
+    margin-top: 5%;
+}
+.image{
+    position: relative;
+    float: left;
+    margin-left: 2%;
+    margin-bottom: 5%;
+}
+.description-element{
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-family: CENTURY GOTHIC;
+    color: #0e5d47;
+}
