@@ -13,12 +13,7 @@ header {
 
 }
 
-.carousel-inner img {
-    display: block;
-    height: 40rem;
-    filter: alpha(Opacity=85);
-    opacity: 0.85;
-}
+
 
 .header-container {
     display: flex;
@@ -138,7 +133,15 @@ header {
     left: 5%;
     width: 100%;
 }
-
+.carousel-inner img {
+    display: block;
+    height: 40rem;
+    filter: alpha(Opacity=85);
+    opacity: 0.85;
+}
+/******************/
+/*Like*/
+/**/
 .favorite-product{
     width: 90%;
     position: relative;

@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="/img/znak.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/productDescription.css">
+    <link rel="stylesheet" href="/css/w3.css">
+
 
 </head>
 <body>
@@ -18,10 +20,18 @@
 
 
 
-
-
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $('.bi-heart').on('click', function () {
+        $('.bi-heart').toggleClass('red');
+    })
+
+    $('.carousel-inner .carousel-item').first().addClass('active');
+    $('.carousel-indicators #carouselExampleIndicators').first().addClass('active');
+
+</script>
 </body>
 </html>

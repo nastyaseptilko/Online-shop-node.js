@@ -1,29 +1,73 @@
-.product-description{
+.product-description {
     position: relative;
     left: 5%;
     width: 90%;
 }
-.description{
+/*IMAGE SLIDE*/
+.main-container-product{
     position: relative;
     float: left;
-    font-size: 1.7em;
-    border: 1.5px solid black;
-    border-radius: 20px;
-    padding: 3%;
+    width: 40%;
+    margin-top: 3%;
 }
-.product-image{
-    position: relative;
-    margin-top: 5%;
-}
-.image{
+
+
+/*PRODUCT DESCRIPTION*/
+.product{
     position: relative;
     float: left;
-    margin-left: 2%;
-    margin-bottom: 5%;
+    width: 45%;
+    margin-top: 3%;
 }
-.description-element{
-    font-size: 2rem;
-    text-transform: uppercase;
+
+/*LIKE && ORDER ICONS */
+.like-order-product{
+    margin-top: 3%;
+    margin-left: 1%;
+    font-size: 2.5rem;
+    position: relative;
+    width: 5%;
+    float: left;
+    border-radius:100px; /* Радиус скругления */
+    border: 1.5px solid #0e5d47; /* Параметры рамки */
+    box-shadow: 0 0 8px #81847f; /* Параметры тени */
+
+}
+.btn-link {
+    font-weight: 400;
     font-family: CENTURY GOTHIC;
+    font-size: 1.2rem;
+    text-transform: uppercase;
     color: #0e5d47;
+    background-color: transparent;
 }
+
+.btn-link:hover {
+    color: gray;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+.card-body {
+    font-family: CENTURY GOTHIC;
+}
+
+.btn-link:focus {
+    text-decoration: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.bi {
+    cursor: pointer;
+    color: black;
+    margin-left: 18%;
+}
+.bi:hover {
+    color: rgba(189, 185, 185, 0.863);
+}
+.red{
+    background: red;
+}
+
+
