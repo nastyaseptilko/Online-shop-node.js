@@ -2,6 +2,7 @@
 body {
     background: url("/img/fon.jpg") repeat-y;
     background-size: 100%;
+    font-family: CENTURY GOTHIC;
 }
 
 .forms {
@@ -25,7 +26,6 @@ body {
 .title-register {
     position: relative;
     top: 10%;
-    font-family: CENTURY GOTHIC;
     font-size: 2rem;
     left: 33%;
 }
@@ -37,7 +37,7 @@ body {
     cursor: pointer;
     font-size: 1.7rem;
     color: black;
-    font-family: CENTURY GOTHIC;
+
 }
 
 .register:hover {

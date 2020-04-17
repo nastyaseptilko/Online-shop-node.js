@@ -1,3 +1,4 @@
+
 .product-description {
     position: relative;
     left: 5%;
@@ -9,7 +10,13 @@
     float: left;
     width: 40%;
     margin-top: 3%;
+
 }
+.carousel-inner{
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
 
 
 /*PRODUCT DESCRIPTION*/
@@ -18,6 +25,9 @@
     float: left;
     width: 45%;
     margin-top: 3%;
+}
+.card-body{
+    font-size: 1.1rem;
 }
 
 /*LIKE && ORDER ICONS */
@@ -30,12 +40,13 @@
     float: left;
     border-radius:100px; /* Радиус скругления */
     border: 1.5px solid #0e5d47; /* Параметры рамки */
-    box-shadow: 0 0 8px #81847f; /* Параметры тени */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 
 }
+
 .btn-link {
     font-weight: 400;
-    font-family: CENTURY GOTHIC;
     font-size: 1.2rem;
     text-transform: uppercase;
     color: #0e5d47;
@@ -46,10 +57,6 @@
     color: gray;
     text-decoration: none;
     font-size: 1.4rem;
-}
-
-.card-body {
-    font-family: CENTURY GOTHIC;
 }
 
 .btn-link:focus {
@@ -67,7 +74,8 @@
     color: rgba(189, 185, 185, 0.863);
 }
 .red{
-    background: red;
+    fill: red;
+   /*background-color: red;*/
 }
 
 

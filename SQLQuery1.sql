@@ -52,7 +52,12 @@ create table Products(
 );
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
-('For Women', 'Рубашка и Брюки', 158.70, ' РАЗМЕРЫ: XS, S, L, XL; ДЛИНА ИЗДЕЛИЯ ПО СПИНКЕ РУБАШКА:59.0 см.; ДЛИНА БРЮК ОТ ТАЛИИ:110.0 см.; СОСТАВ:15% эластан / 75% хлопок; ЦВЕТ: синий / черный; ПОКРОЙ: свободный, ТИП ТКАНИ: хлопчатобумажный')
+('For Men', 'Джемпер ANTIGUA', 69.80, 'РАЗМЕРЫ: S, L, XL, XXL; Джемпер выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: прямой крой, застежка на пуховице, трикотажные манжеты; СОСТАВ: Акрил - 100%'),
+('For Men', 'Джемпер Jack & Jones', 119.10, 'РАЗМЕРЫ: L, XL, XXL, XXXL; Джемпер выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: прямой крой, застежка на пуховице, трикотажные манжеты; СОСТАВ: Лен - 55%, Хлопок - 45%')
+
+
+
+('For Women', 'Костюм', 235.90, ' РАЗМЕРЫ: XS, S, L, XL, XL2; ДЛИНА ИЗДЕЛИЯ ПО СПИНКЕ:170.0см.; ДЛИНА БРЮК ОТ ТАЛИИ:100.0см.; СОСТАВ:5% эластан / 75% хлопок / 20% тиар; ЦВЕТ: бежевый; ПОКРОЙ: свободный, ТИП ТКАНИ: кашемир')
 ('For Women', 'Cross', 169.99, 'Very beautiful Cross for women.')
 ('For Men', 'Jacket-TG', 139.99, 'Very beautiful jacket for men.'),
 
@@ -116,7 +121,7 @@ create table Image(
 
 SELECT * FROM Image WHERE Product_Id =1 ;
 SELECT Url  FROM Image  where  Product_Id =1 ;
-delete from Image;
+delete from Image where Product_Id=11;
 
 INSERT INTO Image(Product_Id, Url) VALUES
 (3, '/img/children/c1.jpg'),
@@ -130,8 +135,14 @@ INSERT INTO Image(Product_Id, Url) VALUES
 
 
 INSERT INTO Image(Product_Id, Url) VALUES
-(7, '/img/women/w11.jpg'),
-(7, '/img/women/w12.jpg')
+(19, '/img/men/m40.jpg'),
+(19, '/img/men/m41.jpg'),
+(20, '/img/men/m42.jpg'),
+(20, '/img/men/m43.jpg')
+
+(10, '/img/men/m16.jpg'),
+(10, '/img/men/m17.jpg'),
+(10, '/img/men/m18.jpg')
 
 
 (4, '/img/women/w8.jpg'),
