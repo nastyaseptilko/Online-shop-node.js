@@ -50,3 +50,14 @@ body {
     color: red;
     text-transform: uppercase;
 }
+.ico-fas {
+    font-size: 3rem;
+    color: #0e5d47;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+.ico-fas:hover{
+    color: #858385;
+    /*box-shadow: 0 15px 15px 0 rgba(0,0,0,0.5);*/
+    transition: 0.3s;
+}

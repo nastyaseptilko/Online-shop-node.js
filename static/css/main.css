@@ -132,6 +132,14 @@ header {
     filter: alpha(Opacity=85);
     opacity: 0.85;
 }
+.btn{
+    background: #0e5d47;
+    border-color:#0e5d47 ;
+}
+.btn:hover{
+    background: #686668;
+    border: none;
+}
 /******************/
 /*Like*/
 /**/
@@ -155,20 +163,11 @@ footer{
     float: right;
     text-transform: uppercase;
 }
-.shopping-list{
-    position: relative;
-    float: right;
-}
-.ico-fas {
-    font-size: 3rem;
-    border: 1px solid;
-    border-radius: 100px;
-    padding: 15px;
-}
+
 
 /***********Всплывающее окно для shopping list*/
 #myModal {
-    width: 500px; height: 500px;
+    width: 500px; height: 80%;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
@@ -187,7 +186,7 @@ footer{
     top: 1px;   right: 11px;
     cursor: pointer;
     display: block;
-    font-size: 29px;
+    font-size: 35px;
 }
 #myOverlay {
     z-index: 37;
@@ -198,9 +197,31 @@ footer{
     cursor :pointer;
     display :none;
 }
+
 /***************window****/
+.shopping-list{
+    position: fixed;
+    left: 1%;
+    bottom: 2%;
+    float: right;
+}
+.shopping-list:hover{
+    color: #686668;
+}
+.ico-fas {
+    font-size: 3rem;
+    border: 1px solid;
+    border-radius: 100px;
+    padding: 15px;
+    color: #0e5d47;
+}
+.ico-fas:hover{
+    color:#686668 ;
+    box-shadow: 0 15px 15px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
 .h2-for-shopping-list{
-    background: #7D8A2E;
+    background: #0e5d47;
     margin: 0;
     padding: 10px 15px;
     color: white;
@@ -215,7 +236,7 @@ footer{
 #shopping-list-item{
     background: #dfdfdf;
     width: 465px;
-    margin: 100px auto;
+    margin: 40px auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
@@ -229,7 +250,6 @@ footer{
 }
 .li-shopping-list{
     border-top: 1px solid white;
-    color: #565656;
     height: 50px;
     line-height: 50px;
     font-size: 20px;
@@ -241,11 +261,11 @@ input{
     width: 100%;
     padding: 15px;
     box-sizing: border-box;
-    color: #7D8A2E ;
+    color: #0e5d47 ;
 }
 input:focus{
     background: white;
-    border: 1px solid #7D8A2E;
+    border: 1px solid #0e5d47;
     outline: none;
 }
 .li-shopping-list .span-shopping-list{

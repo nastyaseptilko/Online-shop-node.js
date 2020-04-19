@@ -1,9 +1,9 @@
-const fs = require('fs');
-const url = require('url');
 const express = require("express");
 const expressHandlebars = require('express-handlebars');
 
 const db = require('./model/db/db_Qdew');
+const clientController = require('./controllers/ClientController');
+const productController = require('./controllers/ProductController');
 const app = express();
 
 app.engine('handlebars', expressHandlebars());
@@ -16,227 +16,44 @@ app.get("/", function (request, response) {
     response.sendFile(__dirname + "/view/new.html");
 });
 
-app.get("/login", function (request, response) {
-    response.render('login', {
-        title: 'Login',
-        layout: 'authorization',
-        registerLink: true
-    });
-});
+app.get("/login", clientController.getPageLogin);
 
-app.get("/register", function (request, response) {
-    response.render('register', {
-        title: 'Register',
-        layout: 'authorization',
-        registerLink: false
-    });
-});
+app.get("/register", clientController.getPageRegister);
 
-app.get("/pageForWomen", function (request, response) {
-    db.connectionPool.connect()
-        .then(pool => {
-            return pool.request()
-                .query(`SELECT pr.Product_id, pr.Price, img.Url
-                                  FROM Products pr
-                                  CROSS APPLY
-                                  (
-                                      SELECT TOP 1 im.Url
-                                      FROM Image im
-                                      WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Women'`)
-                .then(Result => {
-                    if (Result.recordset.length != 0) {
-                        response.render('pageForWomen', {
-                            title: 'For Women',
-                            layout: 'products',
-                            titlePage: 'women shop',
-                            products: Result.recordset
-                        });
-                    } else {
-                        console.log("ERROR");
-                    }
-                    pool.close();
-                });
-        });
+app.get("/pageForWomen", productController.getPageForWomen);
 
-});
+app.get("/pageForMen", productController.getPageForMen);
 
-app.get("/pageForMen", function (request, response) {
-    db.connectionPool.connect()
-        .then(pool => {
-            return pool.request()
-                .query(`SELECT pr.Product_id, pr.Price, img.Url
-                                  FROM Products pr
-                                  CROSS APPLY
-                                  (
-                                      SELECT TOP 1 im.Url
-                                      FROM Image im
-                                      WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Men'`)
-                .then(Result => {
-                    if (Result.recordset.length != 0) {
-                        response.render('pageForMenShop', {
-                            title: 'For Men',
-                            layout: 'products',
-                            titlePage: 'men shop',
-                            products: Result.recordset
-                        });
-                    } else {
-                        console.log("ERROR");
-                    }
-                    pool.close();
-                });
-        });
-});
+app.get("/pageForChildren", productController.getPageForChildren);
 
-app.get("/pageForChildren", function (request, response) {
-    db.connectionPool.connect()
-        .then(pool => {
-            return pool.request()
-                .query(`SELECT pr.Product_id, pr.Price, img.Url
-                                  FROM Products pr
-                                  CROSS APPLY
-                                  (
-                                      SELECT TOP 1 im.Url
-                                      FROM Image im
-                                      WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Children'`)
-                .then(Result => {
-                    if (Result.recordset.length != 0) {
-                        response.render('pageForChildren', {
-                            title: 'For Children',
-                            layout: 'products',
-                            titlePage: 'children shop',
-                            products: Result.recordset
-                        });
-                    } else {
-                        console.log("ERROR");
-                    }
-                    pool.close();
-                });
-        });
-});
-
-app.get("/products/:productId", function (request, response) {
-    // Если придет строка, а мы конвертим в число - в переменную запишется NaN == false
-    const productId = Number(request.params.productId);
-    if (!productId) {
-        response.status(404).end();
-        return;
-    }
-
-    db.connectionPool.connect()
-        .then(pool => {
-            return pool.request()
-                .query(`SELECT * FROM Products WHERE Product_id = ` + productId)
-                .then(async Result => {
-                    if (Result.recordset.length != 0) {
-                        const images = await pool.query('SELECT * FROM Image WHERE Product_id = ' + productId);
-
-                        response.render("productEntityDescription", {
-                            title: "Description for " + productId + " product",
-                            layout: "productDescription",
-                            Product_Name: Result.recordset[0].Name,
-                            Description: Result.recordset[0].Description,
-                            Price: Result.recordset[0].Price,
-                            Discount: Result.recordset[0].Discount,
-                            Images: images.recordset
-                        });
-                    } else {
-                        response.status(404).end();
-                    }
-                    pool.close();
-                });
-        });
-
-
-});
+app.get("/products/:productId", productController.getPageDescription);
 
 app.get("/sale", function (request, response) {
     response.sendFile(__dirname + "/view/sale.html");
 });
 
 app.get("/likeProducts", function (request, response) {
-    response.sendFile(__dirname + "/view/likeProducts.html");
+   // response.sendFile(__dirname + "/view/likeProducts.html");
+    console.log("cccc");
+    db.connectionPool.connect()
+        .then(pool => {
+            return pool.request()
+        .query(`INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id, Order_Id) VALUES
+('true', DEFAULT, 4, 8, null);`)
+   let product = request.body
+        .then(product => {
+            response.redirect('/');
+            pool.close();
+        })
+});
 });
 app.get("/orders", function (request, response) {
-    /*if () {
-        response.redirect('/login');
-    }*/
-
     response.sendFile(__dirname + "/view/orders.html");
 });
-app.post("/register", function (request, response) {
-    let userInfo = request.body;
-    console.log(userInfo);
-    // TODO: Проверить совпадают ли пароли passwordand confirm password
-    // TODO: если нет - вернуть юзеру ошибку
-    if (userInfo.password !== userInfo.confirm) {
-        response.render('register', {
-            layout: 'authorization',
-            error: 'invalid password'
-        });
-        return;
-    }
-    db.connectionPool.connect()
-        .then(pool => {
-            return pool.request()
-                .input('email', db.sql.NVarChar, userInfo.username)
-                .query(`SELECT * FROM Clients WHERE (Email=@email)`)
-                .then(userResult => {
-                    console.log(userInfo);
-                    if (userResult.recordset.length != 0) {
-                        response.render('register', {
-                            layout: 'authorization',
-                            errorIsUser: 'this user is in the site'
-                        });
-                        pool.close();
-                    } else {
-                        pool.request()
-                            .input('first_name', db.sql.NVarChar, userInfo.firstName)
-                            .input('last_name', db.sql.NVarChar, userInfo.lastName)
-                            .input('phone_number', db.sql.NVarChar, userInfo.phoneNumber)
-                            .input('email', db.sql.NVarChar, userInfo.username)
-                            .input('password', db.sql.NVarChar, userInfo.password)
-                            .input('city', db.sql.NVarChar, userInfo.city)
-                            .query(`INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password,City) 
-                            values (@first_name, @last_name, @phone_number, @email, @password, @city);`)
-                            .then(userResult => {
-                                response.redirect('/');
-                                pool.close();
-                            });
-                    }
-                });
-        });
 
-});
+app.post("/register", clientController.register);
 
-app.post("/login", function (request, response) {
-    db.connectionPool.connect()
-        .then(pool => {
-            let userInfo = request.body;
-            return pool.request()
-                .input('email', db.sql.NVarChar, userInfo.username)
-                .input('password', db.sql.NVarChar, userInfo.password)
-                .query(`SELECT * FROM Clients WHERE (Email=@email) AND (Password=@password)`)
-                .then(userResult => {
-                    console.log(userInfo);
-                    if (userResult.recordset.length != 0) {
-                        response.redirect('/');
-                    } else {
-                        response.render('login', {
-                            layout: 'authorization',
-                            error: 'invalid username or password'
-                        })
-                    }
-                    pool.close();
-
-                    // В recordset лежит массив результата селекта (в нашем случае он должен быть либо пустым, либо там должен быть 1 юзер)
-                    console.log(userResult.recordset);
-
-                });
-        });
-});
+app.post("/login", clientController.login);
 
 app.listen(3000);
 console.log('run server http://localhost:3000/');

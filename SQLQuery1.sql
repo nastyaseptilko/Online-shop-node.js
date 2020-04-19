@@ -105,8 +105,9 @@ create table ProductItems(
 );
 
 INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id, Order_Id) VALUES
-(DEFAULT, DEFAULT, 1, 1, 1), (1, 1, 1, 2, null), (1, DEFAULT, 2, 2, null);
+('true', DEFAULT, 4, 8, null);
 SELECT * FROM ProductItems;
+SELECT * FROM Products;
 
 
 
