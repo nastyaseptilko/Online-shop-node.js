@@ -97,11 +97,16 @@ module.exports = {
                     .query(`SELECT * FROM Products WHERE Product_id = ` + productId)
                     .then(async Result => {
                         if (Result.recordset.length != 0) {
+                            // TODO: селектнуть запись из продукт айтема у которого клиент айди == клиент айди и продукт айди == продукт айди....
                             const images = await pool.query('SELECT * FROM Image WHERE Product_id = ' + productId);
 
                             response.render("productEntityDescription", {
                                 title: "Description for " + productId + " product",
                                 layout: "productDescription",
+                                // TODO: проверить куки, если пользователь залогинен, то отображать сердечко, если нет - нет
+                                displayHeart: true,
+
+                                Product_Id: Result.recordset[0].Product_Id,
                                 Product_Name: Result.recordset[0].Name,
                                 Description: Result.recordset[0].Description,
                                 Price: Result.recordset[0].Price,

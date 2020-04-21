@@ -29,14 +29,21 @@ body {
     font-size: 2rem;
     left: 33%;
 }
-
+a{
+    text-decoration: none!important;
+}
 .goOver-links {
     position: relative;
     top: 15%;
-    left: 20%;
+    left: 18%;
     cursor: pointer;
     font-size: 1.7rem;
-    color: black;
+    color: #0e5d47;
+
+}
+.goOver-links:hover{
+    box-shadow: 0 15px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
 
 }
 
@@ -60,4 +67,15 @@ body {
     color: #858385;
     /*box-shadow: 0 15px 15px 0 rgba(0,0,0,0.5);*/
     transition: 0.3s;
+}
+#submit{
+    background: #0e5d47;
+    border-color:#0e5d47 ;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#submit:hover{
+    background: #686668;
+    border: none;
+    font-size: 0.95rem;
 }

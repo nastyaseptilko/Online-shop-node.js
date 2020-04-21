@@ -15,7 +15,11 @@ header {
 .header-container {
     display: flex;
 }
-
+.img-logo{
+    width: 75px;
+    height: 70px;
+    border-radius: 100px;
+}
 .logo {
     position: relative;
     left: 5%;
@@ -26,13 +30,7 @@ header {
     font-size: 3em;
 }
 
-.login {
-    cursor: pointer;
-}
-.login:hover {
-    color: rgba(189, 185, 185, 0.863);
 
-}
 .login a{
     position: relative;
     top: 30%;
@@ -40,8 +38,12 @@ header {
     width: 20%;
     font-size: 1.5em;
     color: black;
+    cursor: pointer;
+    text-decoration: none!important;
 }
-
+.login a:hover {
+    color: rgba(189, 185, 185, 0.863);
+}
 
 .title {
     cursor: pointer;
@@ -68,6 +70,7 @@ header {
 
 .menu.open ul {
     display: block;
+
 }
 .menu ul {
     position: relative;
@@ -76,11 +79,13 @@ header {
     right:58.3% ;
     top:25%;
 }
-
 .w3-red, .w3-hover-red:hover {
     color: black!important;
     background-color: #f1f1f1!important;
 
+}
+.w3-bar-item{
+    text-decoration: none!important;
 }
 .bi {
     cursor: pointer;
@@ -92,14 +97,14 @@ header {
 .like-products{
     position: relative;
     top: 33%;
-    left: 47%;
+    left: 41%;
     font-size: 1.8em;
     color: black;
 }
 .orders{
     position: relative;
     top: 33%;
-    left: 48%;
+    left: 42%;
     font-size: 1.8em;
 }
 /*
@@ -123,7 +128,6 @@ header {
 
 .img-container {
     position: relative;
-    left: 5%;
     width: 100%;
 }
 .carousel-inner img {
@@ -135,31 +139,37 @@ header {
 .btn{
     background: #0e5d47;
     border-color:#0e5d47 ;
+    height: 50%;
+    margin-top: 1.5%;
+    position: relative;
+    left: 28%;
 }
 .btn:hover{
     background: #686668;
     border: none;
+    font-size: 0.95rem;
 }
 /******************/
 /*Like*/
 /**/
 .favorite-product{
-    width: 90%;
+    width: 70%;
     position: relative;
-    left: 5%;
+    left: 15%;
     top: 5%;
     bottom: 10%;
+    float: left;
 }
 /******************/
 /*footer*/
-/**/
+
 footer{
     margin-top: 5%;
 }
 .footer-main{
     position: relative;
     right: 5%;
-    font-size: 2em;
+    font-size: 1.2em;
     float: right;
     text-transform: uppercase;
 }

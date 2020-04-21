@@ -1,11 +1,13 @@
+const jwt = require('jsonwebtoken');
 const db = require('./../model/db/db_Qdew');
+
+const jwtSecret = 'qytwdbquwnfkwejbhwebf83478riywhbfsnwnq3r8';
 
 module.exports = {
     register(request, response) {
         if (!checkPasswordsMatch(request.body.password, request.body.confirm, response)) {
             return;
         }
-
         db.connectionPool.connect()
             .then(pool => {
                 return pool.request()
@@ -16,11 +18,15 @@ module.exports = {
                             response.render('register', {
                                 title: 'Register',
                                 layout: 'authorization',
-                                errorIsUser: 'this user is in the site'
+                                errorIsUser: 'This user has already registered'
                             });
                             pool.close();
                         } else {
                             createClient(request.body, pool, response);
+                            response.render('login', {
+                                title: 'Login',
+                                layout: 'authorization'
+                            });
                         }
                     });
             });
@@ -35,8 +41,15 @@ module.exports = {
                     .input('password', db.sql.NVarChar, userInfo.password)
                     .query(`SELECT * FROM Clients WHERE (Email=@email) AND (Password=@password)`)
                     .then(userResult => {
-                        if (userResult.recordset.length != 0) {
-                            response.redirect('/');
+                        if (userResult.recordset.length !== 0) {
+                            jwt.sign({ user: userResult.recordset[0] }, jwtSecret, function(err, token) {
+                                if (err) {
+                                    console.log('Generate token error');
+                                } else {
+                                    response.cookie('token', token);
+                                }
+                                response.redirect('/');
+                            });
                         } else {
                             response.render('login', {
                                 title: 'Login',
@@ -62,6 +75,10 @@ module.exports = {
             layout: 'authorization',
             registerLink: false
         });
+    },
+    logout(request,response){
+        response.clearCookie('token');
+        response.redirect('/login');
     }
 
 };
