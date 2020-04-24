@@ -83,6 +83,7 @@ module.exports = {
                     });
             });
     },
+
     getPageDescription(request,response){
         // Если придет строка, а мы конвертим в число - в переменную запишется NaN == false
         const productId = Number(request.params.productId);
@@ -97,14 +98,19 @@ module.exports = {
                     .query(`SELECT * FROM Products WHERE Product_id = ` + productId)
                     .then(async Result => {
                         if (Result.recordset.length != 0) {
-                            // TODO: селектнуть запись из продукт айтема у которого клиент айди == клиент айди и продукт айди == продукт айди....
+                            let productItem;
+                            const currentUser = request.user;
+                            if (currentUser) {
+                                productItem = await pool.query(`SELECT * FROM ProductItems WHERE Liked = 1 AND Client_Id = ${currentUser.Client_Id} AND Product_Id = ${productId};`);
+                            }
                             const images = await pool.query('SELECT * FROM Image WHERE Product_id = ' + productId);
-
                             response.render("productEntityDescription", {
                                 title: "Description for " + productId + " product",
                                 layout: "productDescription",
-                                // TODO: проверить куки, если пользователь залогинен, то отображать сердечко, если нет - нет
-                                displayHeart: true,
+                                displayHeart: !!currentUser,
+                                // already - уже
+                                // liked - лайкнутый
+                                alreadyLiked: !productItem,
 
                                 Product_Id: Result.recordset[0].Product_Id,
                                 Product_Name: Result.recordset[0].Name,
@@ -120,6 +126,7 @@ module.exports = {
                     });
             });
     }
+
 
 
 };

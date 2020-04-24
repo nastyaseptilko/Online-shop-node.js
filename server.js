@@ -7,6 +7,7 @@ const expressHandlebars = require('express-handlebars');
 const db = require('./model/db/db_Qdew');
 const clientController = require('./controllers/ClientController');
 const productController = require('./controllers/ProductController');
+const likeProductsController = require('./controllers/LikeProductsController');
 const app = express();
 
 const jwtSecret = 'qytwdbquwnfkwejbhwebf83478riywhbfsnwnq3r8';
@@ -23,23 +24,32 @@ app.use(bodyParser.json());
 app.use('/like', function (request, response, next) {
     const token = request.cookies.token;
     if (!token) {
-        response.render('login', {
-            title: 'Login',
-            layout: 'authorization'
-        });
-        return;
+        clientController.getPageLogin(request, response);
     } else {
         jwt.verify(token, jwtSecret, function (err, decoded) {
             if (err) {
-                response.render('login', {
-                    title: 'Login',
-                    layout: 'authorization'
-                });
+                clientController.getPageLogin(request, response);
             } else {
                 request.user = decoded.user;
                 next();
             }
         });
+    }
+});
+
+app.use('/products/:productId', function (request, response, next) {
+    const token = request.cookies.token;
+    if (token) {
+        jwt.verify(token, jwtSecret, function (err, decoded) {
+            if (err) {
+                clientController.getPageLogin(request, response);
+            } else {
+                request.user = decoded.user;
+                next();
+            }
+        });
+    } else {
+        next();
     }
 });
 
@@ -66,9 +76,8 @@ app.get("/sale", function (request, response) {
     response.sendFile(__dirname + "/view/sale.html");
 });
 
-app.get("/like", function (request, response) {
-    response.sendFile(__dirname + "/view/likeProducts.html");
-});
+app.get("/like", likeProductsController.getPageLikedProducts);
+
 app.get("/orders", function (request, response) {
     response.sendFile(__dirname + "/view/orders.html");
 });
@@ -99,7 +108,6 @@ app.post("/like", function (request, response) {
                     });
             });
     } else {
-
         db.connectionPool.connect()
             .then(pool => {
                 return pool.request()

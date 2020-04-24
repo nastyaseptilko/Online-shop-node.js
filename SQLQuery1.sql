@@ -21,6 +21,8 @@ create table Clients(
 
 SELECT * FROM Clients WHERE (Email='nastya@mail.ru') AND (Password='password')
 
+--delete from Clients where First_Name='dddd';
+
 INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password) VALUES
 ('Nastya', 'Septilko', '375333212979', 'nastya@mail.ru', 'password'),
 ('Ilya', 'Matsuev', '375292033067', 'ilya@mail.ru', 'password');
@@ -106,9 +108,33 @@ create table ProductItems(
 
 INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id, Order_Id) VALUES
 ('true', DEFAULT, 4, 8, null);
-SELECT * FROM ProductItems;
+SELECT * FROM ProductItems WHERE Liked=1 AND Client_Id=1 ;
 
-SELECT * FROM Products;
+
+select pr.Product_id, pr.Name, pr.Price, pr.Description,
+  ProductItems.Client_Id, 
+  im.Url
+from Products pr
+left join ProductItems on pr.Product_id = ProductItems.Product_id
+left join Image im on im.Image_Id =(
+    SELECT TOP 1 Image_Id 
+    FROM Image
+    WHERE Product_id = pr.Product_id
+) WHERE ProductItems.Client_Id = 1 AND ProductItems.Liked = 1
+
+
+SELECT pr.Product_id, pr.Description, im.Url
+FROM Products pr
+JOIN Image im
+ON im.Image_Id =
+(
+    SELECT TOP 1 Image_Id 
+    FROM Image
+    WHERE Product_id = pr.Product_id
+) WHERE pr.Category = 'For Women' 
+
+
+SELECT * FROM Image;
 
 
 

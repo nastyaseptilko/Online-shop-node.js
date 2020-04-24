@@ -83,6 +83,7 @@ module.exports = {
 
 };
 
+
 function checkPasswordsMatch(password, confirm, response) {
     if (password !== confirm) {
         response.render('register', {
