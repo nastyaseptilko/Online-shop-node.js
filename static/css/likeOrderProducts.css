@@ -1,0 +1,96 @@
+body{
+    font-family: CENTURY GOTHIC;
+}
+
+h1{
+    font-size: 3em;
+    margin-top: 1%;
+    margin-left: 2%;
+
+}
+.img-like-products{
+    position: relative;
+    float: left;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+#realize-order{
+    background: #0e5d47;
+    border-color:#0e5d47 ;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#realize-order:hover{
+    background: #686668;
+    border: none;
+    font-size: 0.95rem;
+}
+#add-order{
+    background: #0e5d47;
+    border-color:#0e5d47 ;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#add-order:hover{
+    background: #686668;
+    border: none;
+    font-size: 0.95rem;
+}
+.ico-fas {
+    font-size: 3rem;
+    color: #0e5d47;
+    float: left;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+.ico-fas:hover{
+    color: #858385;
+    /*box-shadow: 0 15px 15px 0 rgba(0,0,0,0.5);*/
+    transition: 0.3s;
+}
+/******************windows******/
+#myModal {
+    width: 650px; height: 95%;
+    margin: 0 auto;
+    padding: 18px 9px;
+    border-radius: 4px;
+    background: #fafafa;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto;
+    display: none;
+    opacity: 0;
+    z-index: 38;
+    text-align: center;
+}
+#myModal #myModal__close {
+    width: 21px; height: 21px;
+    position: absolute;
+    top: 1px;   right: 11px;
+    cursor: pointer;
+    display: block;
+    font-size: 35px;
+}
+#myOverlay {
+    z-index: 37;
+    position: fixed;
+    background-color: rgba(0,0,0,.7);
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    cursor :pointer;
+    display :none;
+}
+.realize-order-form{
+    padding: 3%;
+}
+#submit{
+    background: #0e5d47;
+    border-color:#0e5d47 ;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+#submit:hover{
+    background: #686668;
+    border: none;
+    font-size: 0.95rem;
+}

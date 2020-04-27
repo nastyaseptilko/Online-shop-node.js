@@ -90,18 +90,18 @@
         </div>
     </div>
 </div>
-
+{{#if displayHeart}}
 <div class="like-order-product">
-    <a href="/orders">
-        <svg class="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+        <svg class="bi bi-bag {{#if alreadyOrdered}} red{{/if}}" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
              xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                   d="M14 5H2v9a1 1 0 001 1h10a1 1 0 001-1V5zM1 4v10a2 2 0 002 2h10a2 2 0 002-2V4H1z"
                   clip-rule="evenodd"/>
             <path d="M8 1.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
         </svg>
-    </a>
 </div>
+{{/if}}
+
 {{#if displayHeart}}
     <div class="like-order-product">
         <svg class="bi bi-heart {{#if alreadyLiked}} red{{/if}}" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
@@ -112,6 +112,7 @@
         </svg>
     </div>
 {{/if}}
+
 <script>
     $('.bi-heart').click(function () {
         const heart = $(this);
@@ -120,6 +121,16 @@
             like();
         } else {
             dislike();
+        }
+    });
+
+    $('.bi-bag').click(function () {
+        const heart = $(this);
+        heart.toggleClass('red');
+        if (heart.hasClass('red')) {
+            addOrder();
+        } else {
+            orderNotOrder();
         }
     });
 
@@ -147,6 +158,38 @@
             },
             body: JSON.stringify({
                 like: 0,
+                productId: Number('{{Product_Id}}')
+            })
+        }).then(response => response.json())
+                .then(response => {
+                    alert('Was Removed!');
+                });
+    }
+
+    function addOrder() {
+        fetch('http://localhost:3000/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                order: 1,
+                productId: Number('{{Product_Id}}')
+            })
+        }).then(response => response.json())
+                .then(response => {
+                    alert('Was Added!');
+                });
+    }
+
+    function orderNotOrder() {
+        fetch('http://localhost:3000/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                order: 0,
                 productId: Number('{{Product_Id}}')
             })
         }).then(response => response.json())

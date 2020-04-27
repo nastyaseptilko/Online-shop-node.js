@@ -121,17 +121,21 @@ module.exports = {
                     .then(async Result => {
                         if (Result.recordset.length !== 0) {
                             let productItem;
+                            let productItemOrder;
                             const currentUser = request.user;
                             if (currentUser) {
                                 productItem = await pool.query(`SELECT * FROM ProductItems WHERE Liked = 1 AND Client_Id = ${currentUser.Client_Id} AND Product_Id = ${productId};`);
+                                productItemOrder = await pool.query(`SELECT * FROM ProductItems WHERE Added = 1 AND Client_Id = ${currentUser.Client_Id} AND Product_Id = ${productId};`);
+
                             }
+
                             const images = await pool.query('SELECT * FROM Image WHERE Product_id = ' + productId);
                             response.render("productEntityDescription", {
                                 title: "Description for " + productId + " product",
                                 layout: "productDescription",
                                 displayHeart: !!currentUser,
                                 alreadyLiked: !!productItem && productItem.recordset.length > 0,
-
+                                alreadyOrdered: !!productItemOrder && productItemOrder.recordset.length > 0,
                                 Product_Id: Result.recordset[0].Product_Id,
                                 Product_Name: Result.recordset[0].Name,
                                 Description: Result.recordset[0].Description,

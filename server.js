@@ -9,6 +9,7 @@ const clientController = require('./controllers/ClientController');
 const productController = require('./controllers/ProductController');
 const likeProductsController = require('./controllers/LikeProductsController');
 const mainPageController = require('./controllers/MainPageController');
+const orderProductsController = require('./controllers/OrderProductsController');
 const app = express();
 
 const jwtSecret = 'qytwdbquwnfkwejbhwebf83478riywhbfsnwnq3r8';
@@ -59,6 +60,14 @@ app.use('/like', function (request, response, next) {
     }*/
 });
 
+app.use('/order', function (request, response, next) {
+    if (!request.user) {
+        clientController.getPageLogin(request, response);
+    } else {
+        next();
+    }
+});
+
 /*app.use('/products/:productId', function (request, response, next) {
     const token = request.cookies.token;
     if (token) {
@@ -98,15 +107,15 @@ app.get("/sale", function (request, response) {
 
 app.get("/like", likeProductsController.getPageLikedProducts);
 
-app.get("/orders", function (request, response) {
-    response.sendFile(__dirname + "/view/orders.html");
-});
+app.get("/orders", orderProductsController.getPageOrderProducts);
 
 app.post("/register", clientController.register);
 
 app.post("/login", clientController.login);
 
 app.post("/like", likeProductsController.setPageLikedProducts);
+
+app.post("/orders", orderProductsController.setOrderProducts);
 
 app.listen(3000);
 console.log('run server http://localhost:3000/');

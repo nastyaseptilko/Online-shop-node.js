@@ -1,8 +1,7 @@
 const db = require('./../model/db/db_Qdew');
 
 module.exports = {
-    getPageLikedProducts(request, response) {
-        //TODO: сделать селект из ProductsItem   с 2мя условиями на проверку Liked=1 AND ClientId =request.user.Client_id
+    getPageOrderProducts(request,response){
         db.connectionPool.connect()
             .then(pool => {
                 const currentUser = request.user;
@@ -16,13 +15,13 @@ module.exports = {
                                         SELECT TOP 1 Image_Id 
                                         FROM Image
                                         WHERE Product_id = pr.Product_id
-                                    ) WHERE ProductItems.Client_Id = ${currentUser.Client_Id} AND ProductItems.Liked = 1;`)
+                                    ) WHERE ProductItems.Client_Id = ${currentUser.Client_Id} AND ProductItems.Added = 1;`)
                     .then(Result => {
                         if (Result.recordset.length != 0) {
 
-                            response.render('like', {
-                                title: 'Like products',
-                                titlePage: 'Продукты которые вы лайкнули',
+                            response.render('orders', {
+                                title: 'Order products',
+                                titlePage: 'Продукты которые вы добавили в корзину',
                                 layout: 'likeOrderProducts',
                                 productItems: Result.recordset
                             });
@@ -32,24 +31,24 @@ module.exports = {
                         pool.close();
                     });
             });
-
     },
-    setPageLikedProducts (request, response) {
+
+    setOrderProducts(request,response){
         const {
             productId,
-            like
+            order
         } = request.body;
         if (!productId) {
             response.status(400).json({});
             return;
         }
-        if (like === 1) {
+        if (order === 1) {
             db.connectionPool.connect()
                 .then(pool => {
                     return pool.request()
                         .input('clientId', db.sql.NVarChar, request.user.Client_Id)
                         .input('productId', db.sql.NVarChar, productId)
-                        .query(`INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id) VALUES(1, DEFAULT, @clientId, @productId);`)
+                        .query(`INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id) VALUES(DEFAULT, 1, @clientId, @productId);`)
                         .then(result => {
                             pool.close();
                             response.json(result);
@@ -61,7 +60,7 @@ module.exports = {
                     return pool.request()
                         .input('clientId', db.sql.NVarChar, request.user.Client_Id)
                         .input('productId', db.sql.NVarChar, productId)
-                        .query(`DELETE FROM ProductItems WHERE Liked = 1 AND Client_Id = @clientId AND Product_Id = @productId;`)
+                        .query(`DELETE FROM ProductItems WHERE Added = 1 AND Client_Id = @clientId AND Product_Id = @productId;`)
                         .then(result => {
                             pool.close();
                             response.json(result);

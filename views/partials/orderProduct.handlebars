@@ -1,0 +1,50 @@
+
+<div class="img-container container ">
+    <div class="card row img-like-products" style="display: flex;flex-direction: row;">
+        <div style="width: 30%;">
+            <img src="{{Url}}" class="card-img-top" alt="">
+        </div>
+        <div class="card-body" style="width: 70%; ">
+            <h5 class="card-title">Name: {{Name}}</h5>
+            <h5 class="card-title">Price: {{Price}} BY</h5>
+            <p class="card-text"> <strong>Description:</strong> {{Description}}</p>
+            <a href="#" id="realize-order" class="btn btn-primary">Realize order</a>
+        </div>
+    </div>
+</div>
+<div id="myModal">
+    <span id="myModal__close" class="close">x</span>
+    <form class="realize-order-form">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Date:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Please enter a date">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Country:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Please enter a country">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">City:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Please enter a city">
+        </div><div class="form-group">
+        <label for="formGroupExampleInput">Street:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Please enter a street">
+    </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Postcode:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Please enter a postcode">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Price:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Please enter a price">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Comment:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Please enter a comment">
+        </div>
+        <button type="submit" id="submit" class="btn btn-primary" >Submit</button>
+    </form>
+</div>
+<div id="myOverlay"></div>
+
+
