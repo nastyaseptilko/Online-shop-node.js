@@ -33,6 +33,41 @@ module.exports = {
                     });
             });
 
+    },
+    setPageLikedProducts (request, response) {
+        const {
+            productId,
+            like
+        } = request.body;
+        if (!productId) {
+            response.status(400).json({});
+            return;
+        }
+        if (like === 1) {
+            db.connectionPool.connect()
+                .then(pool => {
+                    return pool.request()
+                        .input('clientId', db.sql.NVarChar, request.user.Client_Id)
+                        .input('productId', db.sql.NVarChar, productId)
+                        .query(`INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id) VALUES(1, DEFAULT, @clientId, @productId);`)
+                        .then(result => {
+                            pool.close();
+                            response.json(result);
+                        });
+                });
+        } else {
+            db.connectionPool.connect()
+                .then(pool => {
+                    return pool.request()
+                        .input('clientId', db.sql.NVarChar, request.user.Client_Id)
+                        .input('productId', db.sql.NVarChar, productId)
+                        .query(`DELETE FROM ProductItems WHERE Liked = 1 AND Client_Id = @clientId AND Product_Id = @productId;`)
+                        .then(result => {
+                            pool.close();
+                            response.json(result);
+                        });
+                });
+        }
     }
 
 

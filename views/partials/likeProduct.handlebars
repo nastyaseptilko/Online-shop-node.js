@@ -1,8 +1,10 @@
 
 <div class="img-container container ">
-    <div class="card row img-like-products" style="width: 18rem;  ">
-        <img src="{{Url}}" class="card-img-top" alt="...">
-        <div class="card-body">
+    <div class="card row img-like-products" style="display: flex;flex-direction: row;">
+        <div style="width: 30%;">
+            <img src="{{Url}}" class="card-img-top" alt="">
+        </div>
+        <div class="card-body" style="width: 70%; ">
             <h5 class="card-title">Name: {{Name}}</h5>
             <h5 class="card-title">Price: {{Price}} BY</h5>
             <p class="card-text"> <strong>Description:</strong> {{Description}}</p>

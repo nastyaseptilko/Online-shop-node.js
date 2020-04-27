@@ -2,6 +2,10 @@ const db = require('./../model/db/db_Qdew');
 
 module.exports = {
     getPageForWomen(request,response){
+        let page = request.query.page;
+        if (!page) {
+            page = 1
+        }
         db.connectionPool.connect()
             .then(pool => {
                 return pool.request()
@@ -12,7 +16,10 @@ module.exports = {
                                       SELECT TOP 1 im.Url
                                       FROM Image im
                                       WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Women'`)
+                                  ) img WHERE Category = 'For Women'
+                                  ORDER BY Product_id 
+                                  OFFSET ${(page - 1) * 12} ROWS
+                                  FETCH NEXT 12 ROWS ONLY;`)
                     .then(Result => {
                         if (Result.recordset.length != 0) {
                             response.render('pageForWomen', {
@@ -29,6 +36,11 @@ module.exports = {
             });
     },
     getPageForMen(request,response){
+
+        let page = request.query.page;
+        if (!page) {
+            page = 1
+        }
         db.connectionPool.connect()
             .then(pool => {
                 return pool.request()
@@ -39,9 +51,12 @@ module.exports = {
                                       SELECT TOP 1 im.Url
                                       FROM Image im
                                       WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Men'`)
+                                  ) img WHERE Category = 'For Men'
+                                  ORDER BY Product_id 
+                                  OFFSET ${(page - 1) * 12} ROWS
+                                  FETCH NEXT 12 ROWS ONLY;`)
                     .then(Result => {
-                        if (Result.recordset.length != 0) {
+                        if (Result.recordset.length !== 0) {
                             response.render('pageForMenShop', {
                                 title: 'For Men',
                                 layout: 'products',
@@ -57,6 +72,10 @@ module.exports = {
 
     },
     getPageForChildren(request,response){
+        let page = request.query.page;
+        if (!page) {
+            page = 1
+        }
         db.connectionPool.connect()
             .then(pool => {
                 return pool.request()
@@ -67,7 +86,10 @@ module.exports = {
                                       SELECT TOP 1 im.Url
                                       FROM Image im
                                       WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Children'`)
+                                  ) img WHERE Category = 'For Children'
+                                  ORDER BY Product_id 
+                                  OFFSET ${(page - 1) * 12} ROWS
+                                  FETCH NEXT 12 ROWS ONLY;`)
                     .then(Result => {
                         if (Result.recordset.length != 0) {
                             response.render('pageForChildren', {
@@ -97,7 +119,7 @@ module.exports = {
                 return pool.request()
                     .query(`SELECT * FROM Products WHERE Product_id = ` + productId)
                     .then(async Result => {
-                        if (Result.recordset.length != 0) {
+                        if (Result.recordset.length !== 0) {
                             let productItem;
                             const currentUser = request.user;
                             if (currentUser) {
@@ -108,9 +130,7 @@ module.exports = {
                                 title: "Description for " + productId + " product",
                                 layout: "productDescription",
                                 displayHeart: !!currentUser,
-                                // already - уже
-                                // liked - лайкнутый
-                                alreadyLiked: !productItem,
+                                alreadyLiked: !!productItem && productItem.recordset.length > 0,
 
                                 Product_Id: Result.recordset[0].Product_Id,
                                 Product_Name: Result.recordset[0].Name,

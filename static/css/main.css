@@ -97,14 +97,14 @@ header {
 .like-products{
     position: relative;
     top: 33%;
-    left: 41%;
+    left: 45%;
     font-size: 1.8em;
     color: black;
 }
 .orders{
     position: relative;
     top: 33%;
-    left: 42%;
+    left: 46%;
     font-size: 1.8em;
 }
 /*
@@ -142,7 +142,7 @@ header {
     height: 50%;
     margin-top: 1.5%;
     position: relative;
-    left: 28%;
+    left: 37%;
 }
 .btn:hover{
     background: #686668;
