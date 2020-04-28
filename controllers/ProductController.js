@@ -26,7 +26,8 @@ module.exports = {
                                 title: 'For Women',
                                 layout: 'products',
                                 titlePage: 'women shop',
-                                products: Result.recordset
+                                products: Result.recordset,
+                                page: page
                             });
                         } else {
                             console.log("ERROR");
@@ -61,7 +62,8 @@ module.exports = {
                                 title: 'For Men',
                                 layout: 'products',
                                 titlePage: 'men shop',
-                                products: Result.recordset
+                                products: Result.recordset,
+                                page: page
                             });
                         } else {
                             console.log("ERROR");
@@ -96,7 +98,8 @@ module.exports = {
                                 title: 'For Children',
                                 layout: 'products',
                                 titlePage: 'children shop',
-                                products: Result.recordset
+                                products: Result.recordset,
+                                page: page
                             });
                         } else {
                             console.log("ERROR");

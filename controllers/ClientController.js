@@ -105,7 +105,7 @@ function createClient(userInfo, pool, response) {
         .query(`INSERT INTO Clients(First_Name, Last_Name, Phone_number, Email, Password,City) 
                             values (@first_name, @last_name, @phone_number, @email, @password, @city);`)
         .then(userResult => {
-            response.redirect('/');
+            // response.redirect('/');
             pool.close();
         });
 }

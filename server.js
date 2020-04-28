@@ -117,5 +117,7 @@ app.post("/like", likeProductsController.setPageLikedProducts);
 
 app.post("/orders", orderProductsController.setOrderProducts);
 
+app.post("/realizeOrder", orderProductsController.realizeOrder);
+
 app.listen(3000);
 console.log('run server http://localhost:3000/');

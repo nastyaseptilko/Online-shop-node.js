@@ -54,8 +54,8 @@ create table Products(
 );
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
-('For Men', 'Джемпер ANTIGUA', 69.80, 'РАЗМЕРЫ: S, L, XL, XXL; Джемпер выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: прямой крой, застежка на пуховице, трикотажные манжеты; СОСТАВ: Акрил - 100%'),
-('For Men', 'Джемпер Jack & Jones', 119.10, 'РАЗМЕРЫ: L, XL, XXL, XXXL; Джемпер выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: прямой крой, застежка на пуховице, трикотажные манжеты; СОСТАВ: Лен - 55%, Хлопок - 45%')
+('For Women', 'Комбинезон', 651.40, 'РАЗМЕРЫ: S, L, М, XL; Комбинезон выполнен из плотной ткани, хлопковая подкладка.ДЕТАЛИ: свободный крой; СОСТАВ: шерсть - 100%'),
+('For Women', 'Костюм', 408.20, 'РАЗМЕРЫ:S, L, XL, XXL; Костюм выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: свободный крой; СОСТАВ: хлопок - 80% лен - 20%')
 
 
 SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' 
@@ -114,7 +114,7 @@ create table ProductItems(
 );
 
 INSERT INTO ProductItems(Liked, Added, Client_Id, Product_Id, Order_Id) VALUES
-('true', DEFAULT, 4, 8, null);
+('false', DEFAULT, 4, 8, null);
 SELECT * FROM ProductItems WHERE Liked=1 AND Client_Id=1 ;
 
 -----------------
@@ -127,7 +127,7 @@ left join Image im on im.Image_Id =(
     SELECT TOP 1 Image_Id 
     FROM Image
     WHERE Product_id = pr.Product_id
-) WHERE ProductItems.Client_Id = 1 AND ProductItems.Liked = 1
+) WHERE ProductItems.Client_Id = 1 AND ProductItems.Added = 1
 --------------------------
 
 
@@ -141,6 +141,7 @@ create table Image(
 );
 
 SELECT * FROM Image WHERE Product_Id =1 ;
+SELECT * FROM Products
 SELECT Url  FROM Image  where  Product_Id =1 ;
 delete from Image where Product_Id=11;
 
@@ -156,10 +157,10 @@ INSERT INTO Image(Product_Id, Url) VALUES
 
 
 INSERT INTO Image(Product_Id, Url) VALUES
-(19, '/img/men/m40.jpg'),
-(19, '/img/men/m41.jpg'),
-(20, '/img/men/m42.jpg'),
-(20, '/img/men/m43.jpg')
+(28, '/img/women/w5.jpg')
+(27, '/img/women/w4.jpg'),
+(27, '/img/women/w7.jpg')
+(23, '/img/women/w27.jpg')
 
 (10, '/img/men/m16.jpg'),
 (10, '/img/men/m17.jpg'),

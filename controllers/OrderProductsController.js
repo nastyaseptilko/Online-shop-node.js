@@ -67,6 +67,30 @@ module.exports = {
                         });
                 });
         }
+    },
+    realizeOrder(request,response){
+        db.connectionPool.connect()
+            .then(pool => {
+                let orderInfo = request.body;
+                return pool.request()
+                    .input('clientId', db.sql.NVarChar, request.user.Client_Id)
+                    .input('date', db.sql.NVarChar, orderInfo.date)
+                    .input('country', db.sql.NVarChar, orderInfo.country)
+                    .input('city', db.sql.NVarChar, orderInfo.city)
+                    .input('street', db.sql.NVarChar, orderInfo.street)
+                    .input('postcode', db.sql.NVarChar, orderInfo.postcode)
+                    .input('price', db.sql.NVarChar, orderInfo.price)
+                    .input('comment', db.sql.NVarChar, orderInfo.comment)
+                    .query(`INSERT INTO Orders(Client_Id, Order_Date, Country, City, Street, Postcode, Price, Comment) VALUES
+                                                (@clientId, @date, @country, @city, @street, @postcode, @price, @comment);`)
+                    .then(userResult => {
+                        response.render('ToOrder', {
+                            title: 'Order',
+                            layout: 'likeOrderProducts'
+                        });
+                        pool.close();
+                    });
+            });
     }
 
 
