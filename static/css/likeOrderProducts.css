@@ -15,10 +15,13 @@ h1{
     margin-bottom: 1%;
 }
 #realize-order{
+    width: 30%;
+    height: 10%;
     background: #0e5d47;
     border-color:#0e5d47 ;
     margin-top: 1%;
     margin-bottom: 1%;
+    margin-left: 40%;
 }
 #realize-order:hover{
     background: #686668;
@@ -49,8 +52,8 @@ h1{
     transition: 0.3s;
 }
 /******************windows******/
-#myModal {
-    width: 650px; height: 95%;
+.myModal {
+    width: 650px; height: 85%;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
@@ -63,7 +66,7 @@ h1{
     z-index: 38;
     text-align: center;
 }
-#myModal #myModal__close {
+.myModal .myModal__close {
     width: 21px; height: 21px;
     position: absolute;
     top: 1px;   right: 11px;
@@ -71,7 +74,7 @@ h1{
     display: block;
     font-size: 35px;
 }
-#myOverlay {
+.myOverlay {
     z-index: 37;
     position: fixed;
     background-color: rgba(0,0,0,.7);
@@ -83,14 +86,14 @@ h1{
 .realize-order-form{
     padding: 3%;
 }
-#submit{
-    background: #0e5d47;
-    border-color:#0e5d47 ;
+.submit{
+    background: #0e5d47 !important;
+    border-color:#0e5d47 !important;
     margin-top: 1%;
     margin-bottom: 1%;
 }
-#submit:hover{
-    background: #686668;
-    border: none;
+.submit:hover{
+    background: #686668 !important;
+    border: none !important;
     font-size: 0.95rem;
 }

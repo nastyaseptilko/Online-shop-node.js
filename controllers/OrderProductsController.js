@@ -17,16 +17,32 @@ module.exports = {
                                         WHERE Product_id = pr.Product_id
                                     ) WHERE ProductItems.Client_Id = ${currentUser.Client_Id} AND ProductItems.Added = 1;`)
                     .then(Result => {
-                        if (Result.recordset.length != 0) {
-
+                        if (Result.recordset.length !== 0) {
+                            let priceSum = 0;
+                            for (let i=0; i < Result.recordset.length; i++){
+                                let price = Result.recordset[i].Price;
+                                priceSum +=price;
+                            }
                             response.render('orders', {
                                 title: 'Order products',
                                 titlePage: 'Продукты которые вы добавили в корзину',
                                 layout: 'likeOrderProducts',
-                                productItems: Result.recordset
+                                productItems: Result.recordset,
+                                // TODO: добавить информацию о целом заказе (посчитать сумму всех товаров пользователя)Result.recordset что-то
+                                price: priceSum,
+                                buttonRealizeOrder:true,
+                                alertForMessage: false
                             });
                         } else {
-                            console.log("ERROR");
+                            response.render('orders', {
+                                title: 'Order products',
+                                titlePage: 'Продукты которые вы добавили в корзину',
+                                layout: 'likeOrderProducts',
+                                productItems: Result.recordset,
+                                message: 'Ваша корзина пуста!',
+                                alertForMessage:true,
+                                buttonRealizeOrder: false
+                            });
                         }
                         pool.close();
                     });
@@ -69,12 +85,16 @@ module.exports = {
         }
     },
     realizeOrder(request,response){
+        const order = request.body;
+        if (!order) {
+            response.status(400).json({});
+            return;
+        }
         db.connectionPool.connect()
             .then(pool => {
                 let orderInfo = request.body;
                 return pool.request()
                     .input('clientId', db.sql.NVarChar, request.user.Client_Id)
-                    .input('date', db.sql.NVarChar, orderInfo.date)
                     .input('country', db.sql.NVarChar, orderInfo.country)
                     .input('city', db.sql.NVarChar, orderInfo.city)
                     .input('street', db.sql.NVarChar, orderInfo.street)
@@ -82,13 +102,19 @@ module.exports = {
                     .input('price', db.sql.NVarChar, orderInfo.price)
                     .input('comment', db.sql.NVarChar, orderInfo.comment)
                     .query(`INSERT INTO Orders(Client_Id, Order_Date, Country, City, Street, Postcode, Price, Comment) VALUES
-                                                (@clientId, @date, @country, @city, @street, @postcode, @price, @comment);`)
+                                                (@clientId, DEFAULT, @country, @city, @street, @postcode, @price, @comment);`)
                     .then(userResult => {
                         response.render('ToOrder', {
                             title: 'Order',
                             layout: 'likeOrderProducts'
                         });
-                        pool.close();
+                        return pool.request()
+                            .input('clientId', db.sql.NVarChar, request.user.Client_Id)
+                            .query(`DELETE FROM ProductItems WHERE Added = 1 AND Client_Id = @clientId;`)
+                            .then(result => {
+                                pool.close();
+                            });
+
                     });
             });
     }

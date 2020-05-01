@@ -7,53 +7,7 @@
             <h5 class="card-title">Name: {{Name}}</h5>
             <h5 class="card-title">Price: {{Price}} BY</h5>
             <p class="card-text"><strong>Description:</strong> {{Description}}</p>
-            <a href="#" id="realize-order" class="btn btn-primary">Realize order</a>
+
         </div>
     </div>
 </div>
-<div id="myModal">
-    <span id="myModal__close" class="close">x</span>
-    <form class="realize-order-form" action="/realizeOrder" method="post">
-        <div class="form-group">
-            <label for="formGroupExampleInput">Date:</label>
-            <input type="text" name="date" class="form-control" id="formGroupExampleInput"
-                   placeholder="Please enter a date" required>
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Country:</label>
-            <input type="text" name="country" class="form-control" id="formGroupExampleInput2"
-                   placeholder="Please enter a country" required>
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">City:</label>
-            <input type="text" name="city" class="form-control" id="formGroupExampleInput3" placeholder="Please enter a city"
-                   required>
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput">Street:</label>
-            <input type="text" name="street" class="form-control" id="formGroupExampleInput4" placeholder="Please enter a street"
-                   required>
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Postcode:</label>
-            <input type="text" name="postcode" class="form-control" id="formGroupExampleInput5" placeholder="Please enter a postcode"
-                   required>
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Price:</label>
-            <input type="text" name="price" class="form-control" value="{{Price}}" readonly="readonly" id="formGroupExampleInput6"
-                   data-toggle="popover" data-placement="top" data-trigger="focus" title="Способ оплаты"
-                   data-content="Наличными либо картой (на ваше усмотрение).Оплата осуществляется с курьером.">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput">Comment:</label>
-            <input type="text" class="form-control" id="formGroupExampleInput7" name="comment"
-                   placeholder="If you have any wishes or comments write in the field please">
-        </div>
-        <button type="submit" id="submit" class="btn btn-primary">To order!</button>
-
-    </form>
-</div>
-<div id="myOverlay"></div>
-
-
