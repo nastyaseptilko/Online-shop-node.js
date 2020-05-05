@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const expressHandlebars = require('express-handlebars');
+const WebSocket = require('ws');
 
-const db = require('./model/db/db_Qdew');
 const clientController = require('./controllers/ClientController');
 const productController = require('./controllers/ProductController');
 const likeProductsController = require('./controllers/LikeProductsController');
@@ -68,23 +68,6 @@ app.use('/order', function (request, response, next) {
     }
 });
 
-/*app.use('/products/:productId', function (request, response, next) {
-    const token = request.cookies.token;
-    if (token) {
-        jwt.verify(token, jwtSecret, function (err, decoded) {
-            if (err) {
-                clientController.getPageLogin(request, response);
-            } else {
-                request.user = decoded.user;
-                next();
-            }
-        });
-    } else {
-        next();
-    }
-});*/
-
-
 app.get("/", mainPageController.getMainPage);
 
 app.get("/login", clientController.getPageLogin);
@@ -120,6 +103,29 @@ app.post("/orders", orderProductsController.setOrderProducts);
 app.post("/realizeOrder", orderProductsController.realizeOrder);
 
 
-
 app.listen(3000);
 console.log('run server http://localhost:3000/');
+
+
+const wss = new WebSocket.Server({port: 3001});
+const initAssistantMessage = 'Нужна ли помощь?';
+const acceptMessage = 'Вот моя помощь:';
+const refuseMessage = 'Не буду вам помогать.';
+const invalidOptionMessage = 'Не понимаю вас(';
+
+wss.on('connection', function connection(ws) {
+
+    ws.send(initAssistantMessage);
+
+    ws.on('message', function(message) {
+        message = message.toLowerCase();
+        let answer = invalidOptionMessage;
+        if (message === 'да') {
+            answer = acceptMessage;
+        } else if (message === 'нет') {
+            answer = refuseMessage;
+        }
+        ws.send(answer);
+    });
+});
+
