@@ -50,6 +50,9 @@ $(document).ready(function () {
             $('.assistant')
                 .css('display', 'block')
                 .animate({opacity: 1}, 198);
+            // $('body').scroll(function() {
+            //     $('.assistant').css('display', 'none');
+            // });
         });
     });
     $('.assistant-close').click(function () {
@@ -61,6 +64,7 @@ $(document).ready(function () {
     $('.online-assistant').click(function () {
         $(this).removeClass("animated");
     });
+
 });
 
 $('.ul-shopping-list').on('click', '.li-shopping-list', function () {

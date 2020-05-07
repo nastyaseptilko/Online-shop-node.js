@@ -22,7 +22,7 @@ module.exports = {
 
                             response.render('like', {
                                 title: 'Like products',
-                                titlePage: 'Продукты которые вы лайкнули',
+                                titlePage: 'Избранное',
                                 layout: 'likeOrderProducts',
                                 productItems: Result.recordset
                             });

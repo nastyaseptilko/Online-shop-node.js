@@ -25,7 +25,7 @@ module.exports = {
                             response.render('pageForWomen', {
                                 title: 'For Women',
                                 layout: 'products',
-                                titlePage: 'women shop',
+                                titlePage: 'Женская одежда',
                                 products: Result.recordset,
                                 page: page
                             });
@@ -61,7 +61,7 @@ module.exports = {
                             response.render('pageForMenShop', {
                                 title: 'For Men',
                                 layout: 'products',
-                                titlePage: 'men shop',
+                                titlePage: 'мужская одежда',
                                 products: Result.recordset,
                                 page: page
                             });
@@ -97,7 +97,7 @@ module.exports = {
                             response.render('pageForChildren', {
                                 title: 'For Children',
                                 layout: 'products',
-                                titlePage: 'children shop',
+                                titlePage: 'детская одежда',
                                 products: Result.recordset,
                                 page: page
                             });

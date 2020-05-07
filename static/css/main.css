@@ -177,7 +177,10 @@ header {
     bottom: 10%;
     float: left;
 }
-
+.img {
+    width: 25%;
+    margin: 2% 5% 5% 0%;
+}
 /******************/
 /*footer*/
 
@@ -187,13 +190,22 @@ footer {
 
 .footer-main {
     position: relative;
-    right: 5%;
-    font-size: 1.2em;
+    width: 100%;
+    font-size: 1em;
     float: right;
-    text-transform: uppercase;
 }
-
-
+.footer-text{
+    position: relative;
+    text-align: right;
+}
+.table-size-href{
+    color: black;
+    margin-right: 30%;
+}
+.table-size-href:hover {
+    color: rgba(189, 185, 185, 0.863);
+    text-decoration: none;
+}
 /***********Всплывающее окно для shopping list*/
 .myModal {
     width: 500px;
@@ -243,6 +255,7 @@ footer {
     left: 1%;
     bottom: 2%;
     float: right;
+    z-index: 2;
 }
 
 .shopping-list:hover {
@@ -254,6 +267,7 @@ footer {
     left: 7%;
     bottom: 2%;
     float: right;
+    z-index: 2;
 }
 
 .online-assistant:hover {
@@ -266,6 +280,7 @@ footer {
     border-radius: 100px;
     padding: 15px;
     color: #0e5d47;
+    z-index: 3;
 }
 
 .ico-fas:hover {
@@ -280,6 +295,7 @@ footer {
     border-radius: 100px;
     padding: 15px;
     color: #0e5d47;
+    z-index: 3;
 }
 
 .fa-comment-dots:hover {
@@ -365,7 +381,7 @@ footer {
 }
 
 .assistant {
-    position: absolute;
+    position: fixed;
     display: none;
     left: 6%;
     width: 20%;
@@ -373,7 +389,8 @@ footer {
     bottom: 15%;
     border: 1px solid;
     border-radius: 5px;
-    background: white;
+    background: #f7f7f7;
+    z-index: 2;
 }
 
 .assistant-close {
@@ -407,4 +424,15 @@ footer {
     height: 10%;
     width: 90%;
     left: 5%;
+    padding: 2%;
+    border-radius: 5px;
+    border: 1px solid #0e5d47;
+    outline: none;
+}
+.send-message-button{
+    display: block;
+    position: inherit;
+    top: 79.33%;
+    left: 23%;
+    color: #0e5d47;
 }

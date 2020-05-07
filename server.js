@@ -10,6 +10,8 @@ const productController = require('./controllers/ProductController');
 const likeProductsController = require('./controllers/LikeProductsController');
 const mainPageController = require('./controllers/MainPageController');
 const orderProductsController = require('./controllers/OrderProductsController');
+const salePageController = require('./controllers/SaleController');
+const helpPageController = require('./controllers/HelpController');
 const app = express();
 
 const jwtSecret = 'qytwdbquwnfkwejbhwebf83478riywhbfsnwnq3r8';
@@ -45,19 +47,6 @@ app.use('/like', function (request, response, next) {
     } else {
         next();
     }
-    /*const token = request.cookies.token;
-    if (!token) {
-        clientController.getPageLogin(request, response);
-    } else {
-        jwt.verify(token, jwtSecret, function (err, decoded) {
-            if (err) {
-                clientController.getPageLogin(request, response);
-            } else {
-                request.user = decoded.user;
-                next();
-            }
-        });
-    }*/
 });
 
 app.use('/order', function (request, response, next) {
@@ -84,9 +73,9 @@ app.get("/pageForChildren", productController.getPageForChildren);
 
 app.get("/products/:productId", productController.getPageDescription);
 
-app.get("/sale", function (request, response) {
-    response.sendFile(__dirname + "/view/sale.html");
-});
+app.get("/sale",salePageController.getSalePage);
+
+app.get("/tableSize",helpPageController.getHelpPage);
 
 app.get("/like", likeProductsController.getPageLikedProducts);
 
@@ -108,10 +97,10 @@ console.log('run server http://localhost:3000/');
 
 
 const wss = new WebSocket.Server({port: 3001});
-const initAssistantMessage = 'Нужна ли помощь?';
-const acceptMessage = 'Вот моя помощь:';
-const refuseMessage = 'Не буду вам помогать.';
-const invalidOptionMessage = 'Не понимаю вас(';
+const initAssistantMessage = 'Здравствуйте, меня зовут Анна! Я online-консультант. Нужна ли Вам помощь?';
+const acceptMessage = 'Для того чтобы приобрести у нас товар,вам нужно зарегистривоваться у нас на сайте, а потом войти. В катологе выбрать понравившийся товар, добавить в корзину, далее можно перейти к оформлению заказа! Если у вас возникают проблемы с сайтом обращаться по телефону: 8(033)321-29-79 или написать нам в Telegram: @nseptilko. Спасибо что вы с нами!';
+const refuseMessage = 'Без проблем. Приятных покупок!';
+const invalidOptionMessage = 'Я вас не понимаю:( Напишите да/нет.';
 
 wss.on('connection', function connection(ws) {
 
@@ -120,9 +109,9 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function(message) {
         message = message.toLowerCase();
         let answer = invalidOptionMessage;
-        if (message === 'да') {
+        if (message === 'да' || message ==='yes') {
             answer = acceptMessage;
-        } else if (message === 'нет') {
+        } else if (message === 'нет' || message ==='no') {
             answer = refuseMessage;
         }
         ws.send(answer);

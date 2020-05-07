@@ -54,11 +54,22 @@ create table Products(
 );
 
 INSERT INTO Products(Category, Name, Price, Description) VALUES
-('For Women', 'Комбинезон', 651.40, 'РАЗМЕРЫ: S, L, М, XL; Комбинезон выполнен из плотной ткани, хлопковая подкладка.ДЕТАЛИ: свободный крой; СОСТАВ: шерсть - 100%'),
-('For Women', 'Костюм', 408.20, 'РАЗМЕРЫ:S, L, XL, XXL; Костюм выполнен из плотного текстиля, хлопковая подкладка. ДЕТАЛИ: свободный крой; СОСТАВ: хлопок - 80% лен - 20%')
+('For Children', 'Костюм спортивный', 105.05, 'РАЗМЕРЫ: XS, S, L, М, XL, XXL; Костюм выполнен из хлопковой ткани; ДЕТАЛИ: свободный крой; СОСТАВ: хлопок - 100%'),
+('For Children', 'Платье', 102.20, 'РАЗМЕРЫ: XS, S, L, XL; Платье выполнено из свободного текстиля. ДЕТАЛИ: плотный крой; СОСТАВ: вельвет - 80% и синтетика - 20%'),
+('For Children', 'Юбка', 92.20, 'РАЗМЕРЫ: S, L, XL; Юбка выполнена из плотного текстиля. ДЕТАЛИ: плотный крой; СОСТАВ: атлас - 80% и хлопок - 20%')
 
 
 SELECT pr.Product_id, pr.Description, im.Url FROM Products pr JOIN Image im on pr.Product_id = im.Product_id WHERE Category = 'For Women' 
+
+
+('For Women', 'Блузка', 191.05, 'РАЗМЕРЫ: XS, S, L, М, XL, XXL; Блузка выполнена из шелковой ткани; ДЕТАЛИ: свободный крой; СОСТАВ: шелк - 100%'),
+('For Women', 'Джинсы', 102.20, 'РАЗМЕРЫ: XS, S, L, XL; Джинсы выполнены из свободного текстиля. ДЕТАЛИ: плотный крой; СОСТАВ: джинс - 80% и синтетика - 20%'),
+('For Women', 'Юбка', 92.20, 'РАЗМЕРЫ: S, L, XL; Юбка выполнена из плотного текстиля. ДЕТАЛИ: плотный крой; СОСТАВ: вельвет - 80% и хлопок - 20%')
+
+
+UPDATE Products
+SET Price = 345.99
+WHERE Product_Id = 4;
 
 
 
@@ -88,17 +99,17 @@ ORDER BY Product_id
     OFFSET 2 ROWS
     FETCH NEXT 16 ROWS ONLY;
 ------------------------
-SELECT pr.Product_id, pr.Price, img.Url
+SELECT pr.Product_id, pr.Price, pr.Name, img.Url
                                   FROM Products pr 
                                   CROSS APPLY
                                   (
                                       SELECT TOP 1 im.Url
                                       FROM Image im
                                       WHERE im.Product_id = pr.Product_id
-                                  ) img WHERE Category = 'For Men' 
+                                  ) img WHERE Category = 'For Women' 
 								  ORDER BY Product_id 
-									OFFSET 0 ROWS
-									FETCH NEXT 12 ROWS ONLY
+									OFFSET 14 ROWS
+									FETCH NEXT 3 ROWS ONLY
 	
 
 
@@ -140,16 +151,16 @@ create table Image(
 	Url varchar(150)
 );
 
-SELECT * FROM Image WHERE Product_Id =1 ;
+
 SELECT * FROM Products
-SELECT Url  FROM Image  where  Product_Id =1 ;
-delete from Image where Product_Id=11;
+
+delete from Image where Product_Id=1;
 
 INSERT INTO Image(Product_Id, Url) VALUES
-(3, '/img/children/c1.jpg'),
-(3, '/img/children/c2.jpg'),
-(3, '/img/children/c3.jpg'),
-(3, '/img/children/c4.jpg'),
+(43, '/img/children/c5.jpg')
+(42, '/img/children/c13.jpg'),
+(42, '/img/children/c14.jpg'),
+(42, '/img/children/c15.jpg')
 (3, '/img/children/c5.jpg'),
 (3, '/img/children/c6.jpg'),
 (3, '/img/children/c7.jpg'),
@@ -157,10 +168,9 @@ INSERT INTO Image(Product_Id, Url) VALUES
 
 
 INSERT INTO Image(Product_Id, Url) VALUES
-(28, '/img/women/w5.jpg')
-(27, '/img/women/w4.jpg'),
-(27, '/img/women/w7.jpg')
-(23, '/img/women/w27.jpg')
+(40, '/img/women/w65.jpg'),
+(40, '/img/women/w66.jpg'),
+(40, '/img/women/w67.jpg')
 
 (10, '/img/men/m16.jpg'),
 (10, '/img/men/m17.jpg'),
