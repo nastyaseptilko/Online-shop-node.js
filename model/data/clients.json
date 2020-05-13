@@ -1,0 +1,21 @@
+[
+  {
+    "First_Name":"Nastya",
+    "Last_Name": "Septilko",
+    "Phone_number": "+375333212979",
+    "Email": "nastya@mail.ru",
+    "Password": "password",
+    "BirthDay": "1999-11-29",
+    "Country": "Belarus",
+    "City": "Voronovo",
+    "Postcode": 252545
+  },
+  {
+    "First_Name":"ilya",
+    "Last_Name": "matsuev",
+    "Phone_number": "292033067",
+    "Email": "ilya@gmail.com",
+    "Password": "qwerty",
+    "City": "Lepel"
+  }
+]

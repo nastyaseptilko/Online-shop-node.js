@@ -1,0 +1,12 @@
+[
+  {
+    "Client_Id": 1,
+    "Order_Date": "2020-11-31",
+    "Country": "Belarus",
+    "City": "Minsk",
+    "Street": "Belarusskaya 21",
+    "Postcode": 252625,
+    "Price": 455.3
+
+  }
+]

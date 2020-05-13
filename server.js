@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -92,8 +94,13 @@ app.post("/orders", orderProductsController.setOrderProducts);
 app.post("/realizeOrder", orderProductsController.realizeOrder);
 
 
-app.listen(3000);
-console.log('run server http://localhost:3000/');
+const cert = {
+    key: fs.readFileSync('./certs/resourcePrivateKey.key', 'utf8'),
+    cert: fs.readFileSync('./certs/resourceCert.crt', 'utf8')
+};
+const httpsServer = https.createServer(cert, app);
+httpsServer.listen(3000);
+console.log('run server https://localhost:3000/');
 
 
 const wss = new WebSocket.Server({port: 3001});

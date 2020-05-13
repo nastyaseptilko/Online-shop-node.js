@@ -1,0 +1,23 @@
+[
+  {
+    "Liked": true,
+    "Added": false,
+    "Client_Id": 1,
+    "Product_Id": 3,
+    "Order_Id": null
+  },
+  {
+    "Liked": false,
+    "Added": true,
+    "Client_Id": 1,
+    "Product_Id": 2,
+    "Order_Id": null
+  },
+  {
+    "Liked": true,
+    "Added": true,
+    "Client_Id": 2,
+    "Product_Id": 2,
+    "Order_Id": null
+  }
+]
