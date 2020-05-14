@@ -1,27 +1,32 @@
-body{
+body {
     font-family: CENTURY GOTHIC;
 }
-.href{
+
+.href {
     color: #0c5460;
 
 }
+
 .href:hover {
     color: rgba(189, 185, 185, 0.863);
     text-decoration: none;
 }
-.h1{
+
+.h1 {
     text-transform: uppercase;
     text-align: center;
-    border-bottom: 2px solid gray ;
+    border-bottom: 2px solid gray;
     margin-top: 1%;
 
 }
-.main-div-sale{
+
+.main-div-sale {
     position: relative;
     width: 90%;
     left: 5%;
     bottom: 5%;
 }
+
 .ico-fas {
     font-size: 3rem;
     color: #0e5d47;
@@ -30,8 +35,23 @@ body{
     margin-top: 0%;
 
 }
-.ico-fas:hover{
+
+.ico-fas:hover {
     color: #858385;
     /*box-shadow: 0 15px 15px 0 rgba(0,0,0,0.5);*/
     transition: 0.3s;
+}
+
+.go-up {
+    position: relative;
+    left: 50%;
+    color: #0c5460;
+}
+.go-up:hover {
+    color: #858385;
+    transition: 0.3s;
+}
+svg{
+    width: 2em;
+    height: 2em;
 }

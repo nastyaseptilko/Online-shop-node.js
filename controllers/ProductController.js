@@ -6,7 +6,6 @@ module.exports = {
         if (!page) {
             page = 1;
         }
-
         db.sequelize.query(`SELECT pr.Product_id, pr.Price, img.Url
                                   FROM Products pr
                                   CROSS APPLY
@@ -25,7 +24,9 @@ module.exports = {
                 layout: 'products',
                 titlePage: 'Женская одежда',
                 products: products,
-                page: page
+                page: page,
+                //nextPage: page +=1
+                //previousPage: page--
             });
         });
     },

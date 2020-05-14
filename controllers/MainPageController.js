@@ -13,8 +13,8 @@ module.exports = {
                                       WHERE im.Product_id = pr.Product_id
                                   ) img WHERE Category = 'For Women' 
                                   ORDER BY Product_id 
-                                  OFFSET 1 ROWS
-                                  FETCH NEXT 2 ROWS ONLY;`,
+                                  OFFSET 12 ROWS
+                                  FETCH NEXT 3 ROWS ONLY;`,
             {type: db.Sequelize.QueryTypes.SELECT}
         ).then(products => {
             if (currentUser) {

@@ -42,18 +42,18 @@ module.exports = {
 // true => ВСЕ ДАННЫЕ УДАЛЯТСЯ И ОБНОВЛЯТСЯ В СООТВЕТСТВИИ СТРОГО С JSON ФАЙЛАМИ
 // false => ВСЕ ДАННЫЕ ОСТАЮТСЯ В БД КАК ЕСТЬ
 
-sequelize.sync({force: true})
+sequelize.sync({force: false})
     .then(() => console.log('Db has been synchronizing successfully'))
-    .then(() => {
-        return Promise.all([
-            clients.bulkCreate(require('./data/clients')),
-            categories.bulkCreate(require('./data/categories'))
-        ]).then(() => Promise.all([
-            orders.bulkCreate(require('./data/orders')),
-            products.bulkCreate(require('./data/products'))
-        ])).then(() => Promise.all([
-            productItems.bulkCreate(require('./data/product_items')),
-            images.bulkCreate(require('./data/images'))
-        ]));
-    })
+    // .then(() => {
+    //     return Promise.all([
+    //         clients.bulkCreate(require('./data/clients')),
+    //         categories.bulkCreate(require('./data/categories'))
+    //     ]).then(() => Promise.all([
+    //         orders.bulkCreate(require('./data/orders')),
+    //         products.bulkCreate(require('./data/products'))
+    //     ])).then(() => Promise.all([
+    //         productItems.bulkCreate(require('./data/product_items')),
+    //         images.bulkCreate(require('./data/images'))
+    //     ]));
+    // })
     .catch(err => console.log('Error while synchronizing: ' + err.toString()));
