@@ -1,13 +1,15 @@
 body{
     font-family: CENTURY GOTHIC;
 }
-
-h1{
-    font-size: 3em;
+.title-page{
+    border-bottom: 2px solid gray ;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
     margin-top: 1%;
-    margin-left: 2%;
 
 }
+
 .img-like-products{
     position: relative;
     float: left;
@@ -44,7 +46,7 @@ h1{
     color: #0e5d47;
     float: left;
     margin-left: 1%;
-    margin-top: 1%;
+
 }
 .ico-fas:hover{
     color: #858385;

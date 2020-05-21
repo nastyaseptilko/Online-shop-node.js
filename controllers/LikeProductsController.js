@@ -15,7 +15,7 @@ module.exports = {
                            ) WHERE ProductItems.Client_Id = ${request.user.Client_Id} AND ProductItems.Liked = 1`,
             { type: db.Sequelize.QueryTypes.SELECT }
             ).then(likedProducts => {
-                console.log(JSON.stringify(likedProducts, null, '  '))
+               // console.log(JSON.stringify(likedProducts, null, '  '))
                 response.render('like', {
                     title: 'Like products',
                     titlePage: 'Избранное',
