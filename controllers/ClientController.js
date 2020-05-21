@@ -18,7 +18,7 @@ module.exports = {
                 response.render('register', {
                     title: 'Register',
                     layout: 'authorization',
-                    errorIsUser: 'This user has already registered'
+                    errorIsUser: 'Этот пользователь уже зарегистрирован.'
                 });
             } else {
                 db.Clients.create({
@@ -59,7 +59,7 @@ module.exports = {
                 response.render('login', {
                     title: 'Login',
                     layout: 'authorization',
-                    error: 'Invalid username or password'
+                    error: 'Не верно введено имя пользователя или пароль.'
                 });
             }
         });
@@ -91,7 +91,7 @@ function checkPasswordsMatch(password, confirm, response) {
     if (password !== confirm) {
         response.render('register', {
             layout: 'authorization',
-            error: 'invalid password'
+            error: 'Неверный пароль.'
         });
         return false;
     } else return true;
